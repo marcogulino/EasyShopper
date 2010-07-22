@@ -1,4 +1,4 @@
-package com.gmail.gulino.marco.easyshopper.domain;
+package com.google.code.easyshopper.domain;
 
 import java.util.Currency;
 

@@ -1,6 +1,6 @@
-package com.gmail.gulino.marco.easyshopper.db;
+package com.google.code.easyshopper.db;
 
-import static com.gmail.gulino.marco.easyshopper.utility.Asserts.assertArrayEquals;
+import static com.google.code.easyshopper.utility.Asserts.assertArrayEquals;
 import android.test.AndroidTestCase;
 
 import com.google.code.easyshopper.db.helpers.QueryColumn;

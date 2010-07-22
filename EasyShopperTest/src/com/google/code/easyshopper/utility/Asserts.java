@@ -1,4 +1,4 @@
-package com.gmail.gulino.marco.easyshopper.utility;
+package com.google.code.easyshopper.utility;
 
 import static junit.framework.Assert.fail;
 import android.util.Log;

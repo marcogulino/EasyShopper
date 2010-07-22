@@ -1,4 +1,4 @@
-package com.gmail.gulino.marco.easyshopper.db;
+package com.google.code.easyshopper.db;
 
 
 import android.test.AndroidTestCase;

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="fill_parent"
+	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:id="@+id/AddNewProductLayout"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:gravity="center_horizontal" android:orientation="vertical">
+		<TextView android:text="@string/AddNewProductLabel"
+			android:id="@+id/AddNewProductLabel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+		</TextView>
+		<TextView android:id="@+id/ProductBarcode"
+			android:layout_width="fill_parent" android:layout_height="fill_parent"></TextView>
+		<EditText android:hint="@string/ProductName" android:id="@+id/ProductName"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+
+		<LinearLayout android:id="@+id/AddNewProductLayout_01"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:gravity="center_horizontal" android:orientation="horizontal">
+			<Button android:text="@string/AddToCartButton" android:id="@+id/AddToCartButton"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:minWidth="100dp" />
+			<Button android:text="@string/Done" android:id="@+id/ProductCRUD_DoneButton"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:minWidth="100dp" />
+		</LinearLayout>
+		<ImageView android:clickable="true" android:id="@+id/ProductPicture"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:adjustViewBounds="true" android:maxWidth="400dp"
+			android:maxHeight="300dp"></ImageView>
+	</LinearLayout>
+</ScrollView>

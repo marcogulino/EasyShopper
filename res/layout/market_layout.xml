@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<Spinner android:id="@+id/MarketsSpinner" android:layout_width="fill_parent"
+	android:prompt="@string/Market_promptForMarkets" android:singleLine="true"
+	android:layout_height="48dp" android:drawSelectorOnTop="false" />
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="right"
+		android:orientation="horizontal">
+		<Button android:text="@android:string/ok" android:id="@+id/Market_OkButton"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="100dp" />
+		<Button android:text="@android:string/cancel" android:id="@+id/Market_CancelButton"  android:minWidth="100dp"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<com.google.android.maps.MapView
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:apiKey="0LqukOwZc3BvgLpPvwpFrUFeHbvW92ltJlpzSkQ" android:id="@+id/MarketMapView"
+		android:clickable="true" android:longClickable="true"/>
+
+</LinearLayout>

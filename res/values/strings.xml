@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="app_name">EasyShopper</string>
+<string name="AppNameLabel">Easy Shopper</string>
+<string name="NewShoppingMenuItem">New Shopping</string>
+<string name="ScanNewProductLabel">Add Product...</string>
+<string name="AddNewProductLabel">Found New Product</string>
+<string name="AddToCartButton">Add to Cart</string>
+<string name="ProductName">Product Description</string>
+<string name="ShoppingDateLabel">Date: </string>
+<string name="MarketLabel">Market: </string>
+<string name="PickMarket">Select from Map</string>
+
+<string name="SuggestBestMarket">Suggest</string>
+<string name="Market_AddFromMyLocation">Add from my location</string>
+<string name="Market_AddFromMap">Add from map</string>
+<string name="Market_HintToAddCustomPosition">Use "Menu" key, then "Add from map" to add a shop in this position</string>
+<string name="Market_HintToAddMyPosition">Use "Menu" key, then "Add from my location" to add a shop in current position</string>
+<string name="Market_promptForMarkets">Choose the market to use...</string>
+<string name="Market_Dialog_getName">Enter Market Name</string>
+
+<string name="Market_MyPosition">My Position</string>
+<string name="WaitForPosition">Waiting for position...</string>
+<string name="Market_SelectOnMapFirst">Please click on map the position you want to add first</string>
+<string name="Shopping_SetProductPrice">Set Price</string>
+<string name="Shopping_RemoveProductFromCart">Remove from Cart</string>
+<string name="Shopping_DecreaseProductQuantity">Remove one from Cart</string>
+<string name="Shopping_RemoveProductForAllQuantities">Remove all</string>
+<string name="delete">Delete</string>
+<string name="ProductLabel">Product: </string>
+<string name="unset">not set</string>
+<string name="PleaseChooseMarketFirst">Please choose market for this shopping first.</string>
+<string name="ScanBarcode">Scan barcode using BarcodeScanner</string>
+<string name="ManuallyAddBarcode">Manually Add Barcode</string>
+<string name="TotalPrice">Total Price</string>
+<string name="PickOne">Pick one...</string>
+<string name="Meters">meters</string>
+<string name="Kilometers">km</string>
+<string name="Done">Done</string>
+<string name="TotalItemsLabel">Total items on cart</string>
+<string name="ProductActivity_HowMany">Added to %{shoppingList}.\n%{howmany} of this product for shopping list</string>
+<string name="Price_Type_Unit">by quantity</string>
+<string name="Price_Type_Weight">by weight</string>
+</resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	android:orientation="vertical">
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<TextView android:text="@string/ProductLabel" android:id="@+id/TextView01"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:text="{product name}" android:id="@+id/EditPriceDialog_ProductName"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout02"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<TextView android:text="@string/MarketLabel" android:id="@+id/TextView01"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:text="{market name}" android:id="@+id/EditPriceDialog_MarketName"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout03"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<EditText android:text="" android:id="@+id/EditPrice"
+			android:minWidth="120dp" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:numeric="decimal" />
+		<Spinner android:id="@+id/EditCurrency" android:layout_width="wrap_content"
+			android:layout_height="48dp"></Spinner>
+	</LinearLayout>
+	<RadioGroup android:id="@+id/Price_Type"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<RadioButton android:text="@string/Price_Type_Unit"
+			android:id="@+id/Price_Type_Unit" android:layout_width="fill_parent" android:checked="true"
+			android:layout_height="wrap_content" />
+		<RadioButton android:text="@string/Price_Type_Weight"
+			android:id="@+id/Price_Type_Weight" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" />
+	</RadioGroup>
+
+	<LinearLayout android:id="@+id/LinearLayout03"
+		android:gravity="center_horizontal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal">
+		<Button android:text="@android:string/ok" android:id="@+id/EditPriceDialog_Ok"
+			android:minWidth="100dp" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+		<Button android:text="@android:string/cancel" android:id="@+id/EditPriceDialog_Cancel"
+			android:minWidth="100dp" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+
+</LinearLayout>

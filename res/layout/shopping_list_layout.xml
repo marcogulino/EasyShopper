@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/LinearLayout01"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" android:layout_height="wrap_content"
+	android:orientation="vertical">
+	<LinearLayout android:id="@+id/LinearLayout02"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:orientation="horizontal">
+		<TextView android:text="@string/ShoppingDateLabel"
+			android:id="@+id/ShoppingDateLabel" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></TextView>
+		<TextView android:text="dd/mm/yyyy hh:mm" android:id="@+id/ShoppingDate"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout03"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:orientation="horizontal">
+		<TextView android:text="@string/MarketLabel" android:id="@+id/MarketLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		<TextView android:text="{market}" android:id="@+id/Market"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout04"
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:orientation="horizontal">
+		<Button android:text="@string/PickMarket" android:id="@+id/PickMarket"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+
+		<Button android:text="@string/SuggestBestMarket" android:id="@+id/SuggestBestMarket"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout05" android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="@string/TotalPrice" android:id="@+id/PriceTotalLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:text="{total price}" android:id="@+id/PriceTotal"
+		android:gravity="right"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<LinearLayout android:id="@+id/LinearLayout06" android:orientation="horizontal"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TextView android:text="@string/TotalItemsLabel" android:id="@+id/TotalItemsLabel"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:text="{total items" android:id="@+id/TotalItems"
+		android:gravity="right"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+	</LinearLayout>
+	<ListView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:id="@+id/shopping_list">
+	</ListView>
+</LinearLayout>

@@ -62,7 +62,8 @@ public class MarketDBAdapter extends AbstractDBAdapter {
 			values.put(Columns.name.column().name(), market.getName());
 			values.put(Columns.geo_lat.column().name(), market.getLatitude());
 			values.put(Columns.geo_long.column().name(), market.getLongitude());
-			writableDatabase.insert(Tables.Markets.toString(), null, values);
+			long insertId = writableDatabase.insert(Tables.Markets.toString(), null, values);
+			market.setId(insertId);
 		}
 		closeDatabaseIfSafe(writableDatabase);
 	}

@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +34,10 @@ public class MarketActivity extends MapActivity implements LocationListener {
 
 	public class ActivateItem {
 
+		public void populateAndActivate(Market market) {
+			populateSpinner();
+			activate(market);
+		}
 		public void activate(Market market) {
 			for (int i = 0; i < marketsSpinnerAdapter.getCount(); i++) {
 				if (marketsSpinnerAdapter.getItem(i).hasMarket(market)) {
@@ -167,12 +172,7 @@ public class MarketActivity extends MapActivity implements LocationListener {
 
 					public boolean onMenuItemClick(MenuItem item) {
 						MarketEditDialog marketEditDialog = new MarketEditDialog(MarketActivity.this,
-								new LocationRetrieverFromMyLocationOverlay(myLocationOverlay), new Runnable() {
-
-									public void run() {
-										populateSpinner();
-									}
-								});
+								new LocationRetrieverFromMyLocationOverlay(myLocationOverlay), new ActivateItem());
 						Market market = marketEditDialog.execute();
 						return market != null;
 					}
@@ -189,12 +189,7 @@ public class MarketActivity extends MapActivity implements LocationListener {
 							return false;
 						}
 						MarketEditDialog marketEditDialog = new MarketEditDialog(MarketActivity.this,
-								clickOnMapOverlay, new Runnable() {
-
-									public void run() {
-										populateSpinner();
-									}
-								});
+								clickOnMapOverlay, new ActivateItem());
 						Market market = marketEditDialog.execute();
 						return market != null;
 					}
@@ -247,11 +242,16 @@ public class MarketActivity extends MapActivity implements LocationListener {
 
 	public void onLocationChanged(Location paramLocation) {
 		myLocation=LocationUtils.toGeoPoint(paramLocation);
-		populateSpinner();
-		new ActivateItem().activate(marketsRetrieverByDistance.getCloserMarket());
+		new ActivateItem().populateAndActivate(marketsRetrieverByDistance.getCloserMarket());
 		if(! hintWasShown) {
 			Toast.makeText(MarketActivity.this, R.string.Market_HintToAddMyPosition, Toast.LENGTH_SHORT).show();
 			hintWasShown=true;
+		}
+		int selectedItemPosition = marketsSpinner.getSelectedItemPosition();
+		if(clickOnMapOverlay.size()!= 0 || ! marketsSpinnerAdapter.getItem(selectedItemPosition).hasMarket(null) ) {
+			Logger.d(this, "onLocationChanged", "skipping: clickOnMapOverlay size=" + clickOnMapOverlay.size() );
+			Logger.d(this, "onLocationChanged", "skipping: selected market position: " + selectedItemPosition + ", has market null: " + marketsSpinnerAdapter.getItem(selectedItemPosition).hasMarket(null) );
+			return;
 		}
 		marketMapView.getController().animateTo(myLocation);
 	}

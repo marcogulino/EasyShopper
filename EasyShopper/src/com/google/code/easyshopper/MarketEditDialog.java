@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
+import com.google.code.easyshopper.MarketActivity.ActivateItem;
 import com.google.code.easyshopper.db.MarketDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.Market;
@@ -16,13 +17,13 @@ import com.google.code.easyshopper.domain.Market;
 public final class MarketEditDialog extends EditableTextDialog {
 	private final Context context;
 	private final LocationRetriever locationRetriever;
-	private final Runnable runnable;
+	private final ActivateItem activateMarketItem;
 	private Market market;
-	public MarketEditDialog(Context context, LocationRetriever locationRetriever, Runnable runnable) {
+	public MarketEditDialog(Context context, LocationRetriever locationRetriever, ActivateItem activateMarketItem) {
 		super(context, context.getResources().getString(R.string.Market_Dialog_getName));
 		this.context = context;
 		this.locationRetriever = locationRetriever;
-		this.runnable = runnable;
+		this.activateMarketItem = activateMarketItem;
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public final class MarketEditDialog extends EditableTextDialog {
 			
 			market.setGeoLocation(location);
 			new MarketDBAdapter(new EasyShopperSqliteOpenHelper(context)).saveMarket(market );
-			runnable.run();
+			activateMarketItem.populateAndActivate(market);
 			dismiss();
 		}
 

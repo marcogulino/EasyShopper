@@ -68,7 +68,8 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 	public void insertNewAssociation(String barcode, Shopping shopping) {
 		SQLiteDatabase writableDatabase = writableDatabase();
 		ContentValues values = new ContentValues();
-		values.put(Columns.product.column().name(), barcode);
+		Product product = new ProductDBAdapter(writableDatabase).lookup(barcode);
+		values.put(Columns.product.column().name(), product.getId());
 		values.put(Columns.actualBarcode.column().name(), barcode);
 		values.put(Columns.shopping.column().name(), shopping.getId());
 		writableDatabase.insert(Tables.ProductsShoppings.toString(), null, values);
@@ -118,11 +119,11 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 		closeDatabaseIfSafe(writableDatabase);
 	}
 
-	public int countProductForShopping(Shopping shopping, String barcode) {
+	public int countProductForShopping(Shopping shopping, Product product) {
 		SQLiteDatabase database = readableDatabase();
 		VirtualColumn countColumn = new VirtualColumn("COUNT (*) as cnt");
 		WhereGroup whereGroup = new WhereGroup(new Where(Columns.shopping.column(), shopping.getId()))
-		.and(new Where(Columns.product.column(), barcode));
+		.and(new Where(Columns.product.column(), product.getId()));
 		
 		Cursor query = new Query(database).query(table(), Arrays.asList(countColumn), whereGroup, null, null);
 		query.moveToFirst();

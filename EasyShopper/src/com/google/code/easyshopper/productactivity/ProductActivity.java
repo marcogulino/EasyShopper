@@ -75,9 +75,9 @@ public class ProductActivity extends Activity {
 		private void addProductToCart() {
 			ProductShoppingDBAdapter productShoppingDBAdapter = new ProductShoppingDBAdapter(sqLiteOpenHelper);
 			productShoppingDBAdapter.insertNewAssociation(barcode, shopping);
-			int howMany = productShoppingDBAdapter.countProductForShopping(shopping, barcode);
+			int howMany = productShoppingDBAdapter.countProductForShopping(shopping, product);
 			String text = getResources().getString(R.string.ProductActivity_HowMany).replaceAll("%\\{howmany\\}",
-					String.valueOf(howMany)).replaceAll("%\\{shoppingList\\}",
+					String.valueOf(howMany)).replace("%{shoppingList}",
 					shopping.formattedDate(ProductActivity.this));
 			Toast.makeText(ProductActivity.this, text, Toast.LENGTH_SHORT).show();
 		}

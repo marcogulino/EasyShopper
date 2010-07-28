@@ -37,7 +37,6 @@ public class PriceDBAdapter extends AbstractDBAdapter {
 		id(new Column("id", ColumnType.INTEGER, EasyShopperSqliteOpenHelper.Tables.Prices, true, true)),
 		amount(new Column("amount", ColumnType.INTEGER, Tables.Prices)),
 		currency(new Column("currency", ColumnType.TEXT, Tables.Prices)),
-		pricetype(new Column("type", ColumnType.INTEGER, Tables.Prices)),
 		product( new Column(Tables.Prices, ProductDBAdapter.Columns.id.column())),
 		market(new Column(Tables.Prices, MarketDBAdapter.Columns.id.column()));
 
@@ -79,9 +78,9 @@ public class PriceDBAdapter extends AbstractDBAdapter {
 			Logger.d(this, "save", "updating existing price: " + existingPrice);
 			String query = "UPDATE " + table() + " set " + Columns.amount.column().name() + "=?, "
 					+ Columns.currency.column().name() + "=?, " + Columns.market.column().name() + "=?, " + Columns.product.column().name()
-					+ "=?, " + Columns.pricetype.column().name() + "=? WHERE " + Columns.id.column().name() + "=?";
+					+ "=? WHERE " + Columns.id.column().name() + "=?";
 			Object[] objects = new Object[] { price.getLongAmount(), price.getCurrency().getCurrencyCode(),
-					price.getMarket().getId(), price.getProduct().getBarcode(), price.getPriceType().getType(),
+					price.getMarket().getId(), price.getProduct().getBarcode(),
 					price.getId() };
 			writableDatabase.execSQL(query, objects);
 		} else {
@@ -91,7 +90,6 @@ public class PriceDBAdapter extends AbstractDBAdapter {
 			values.put(Columns.currency.column().name(), price.getCurrency().getCurrencyCode());
 			values.put(Columns.market.column().name(), price.getMarket().getId());
 			values.put(Columns.product.column().name(), price.getProduct().getBarcode());
-			values.put(Columns.pricetype.column().name(), price.getPriceType().getType());
 			long priceId = writableDatabase.insert(table().toString(), null, values);
 			Logger.d(this, "save", "got insert id: " + priceId);
 			price.setId(priceId);

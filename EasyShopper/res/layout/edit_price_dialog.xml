@@ -27,16 +27,6 @@
 		<Spinner android:id="@+id/EditCurrency" android:layout_width="wrap_content"
 			android:layout_height="48dp"></Spinner>
 	</LinearLayout>
-	<RadioGroup android:id="@+id/Price_Type"
-		android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<RadioButton android:text="@string/Price_Type_Unit"
-			android:id="@+id/Price_Type_Unit" android:layout_width="fill_parent" android:checked="true"
-			android:layout_height="wrap_content" />
-		<RadioButton android:text="@string/Price_Type_Weight"
-			android:id="@+id/Price_Type_Weight" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" />
-	</RadioGroup>
-
 	<LinearLayout android:id="@+id/LinearLayout03"
 		android:gravity="center_horizontal" android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:orientation="horizontal">

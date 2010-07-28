@@ -8,7 +8,6 @@ public class Price {
 	private Market market;
 	private Product product;
 	private long id;
-	private PriceType priceType;
 	
 	public Price(long id) {
 		this.id = id;
@@ -51,14 +50,6 @@ public class Price {
 		this.product = product;
 	}
 
-	public PriceType getPriceType() {
-		return priceType;
-	}
-	
-	public void setPriceType(PriceType priceType) {
-		this.priceType = priceType;
-	}
-	
 	@Override
 	public String toString() {
 		return this.getClass().getName() + " { id=" + id + ", amount=" + amount + ", market=" + market + ", product=" + product + "}";

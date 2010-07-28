@@ -1,8 +1,6 @@
 package com.google.code.easyshopper;
 
 import java.util.Currency;
-import java.util.HashMap;
-import java.util.Map;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,7 +17,6 @@ import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Market;
 import com.google.code.easyshopper.domain.Price;
-import com.google.code.easyshopper.domain.PriceType;
 
 public class SetPriceDialog extends Dialog {
 	private final CartProduct cartProduct;
@@ -29,7 +25,6 @@ public class SetPriceDialog extends Dialog {
 	private Spinner currencySpinner;
 	private EditText editPrice;
 	private final Runnable runOnOK;
-	private Map<Integer, PriceType> priceTypeMaps;
 	public static String[] currencies=new String[]{"EUR", "USD"};
 
 	public SetPriceDialog(Context context, CartProduct cartProduct, Runnable runOnOk) {
@@ -37,9 +32,6 @@ public class SetPriceDialog extends Dialog {
 		this.context = context;
 		this.cartProduct = cartProduct;
 		this.runOnOK = runOnOk;
-		priceTypeMaps=new HashMap<Integer, PriceType>();
-		priceTypeMaps.put(R.id.Price_Type_Unit, PriceType.ByUnit);
-		priceTypeMaps.put(R.id.Price_Type_Weight, PriceType.ByWeight);
 	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +54,6 @@ public class SetPriceDialog extends Dialog {
 		editPrice.setText(currentPrice!=null?currentPrice.getAmount().getReadableAmount(1):"");
 	}
 	
-
-	private PriceType checkedType() {
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.Price_Type);
-		return priceTypeMaps.get(radioGroup.getCheckedRadioButtonId());
-	}
 
 	private void populateCurrencyCombo(Price currentPrice) {
 		CurrencyItem currentCurrency =null;
@@ -93,7 +80,6 @@ public class SetPriceDialog extends Dialog {
 			price.setMarket(cartProduct.getShopping().getMarket());
 			price.getAmount().setCurrency(currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency);
 			price.getAmount().setFromReadableAmount(editPrice.getText().toString());
-			price.setPriceType(checkedType() );
 			new PriceDBAdapter(new EasyShopperSqliteOpenHelper(context)).saveAndAssociate(price, cartProduct);
 			runOnOK.run();
 			SetPriceDialog.this.dismiss();

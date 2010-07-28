@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     
-    <string name="app_name">EasyShopper</string>
+<string name="app_name">EasyShopper</string>
 <string name="AppNameLabel">Easy Shopper</string>
 <string name="NewShoppingMenuItem">New Shopping</string>
 <string name="ScanNewProductLabel">Add Product...</string>
@@ -40,6 +40,6 @@
 <string name="Done">Done</string>
 <string name="TotalItemsLabel">Total items on cart</string>
 <string name="ProductActivity_HowMany">Added to %{shoppingList}.\n%{howmany} of this product for shopping list</string>
-<string name="Price_Type_Unit">by quantity</string>
-<string name="Price_Type_Weight">by weight</string>
+<string name="UNUSED_Price_Type_Unit">by quantity</string>
+<string name="UNUSED_Price_Type_Weight">by weight</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import java.text.DecimalFormat;
 
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
+import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.domain.Market;
 
 public class MarketModelAdapter extends MarketSpinnerItem {

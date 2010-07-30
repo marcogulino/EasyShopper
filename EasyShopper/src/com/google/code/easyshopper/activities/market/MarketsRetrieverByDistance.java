@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import java.util.Collections;
 import java.util.Comparator;

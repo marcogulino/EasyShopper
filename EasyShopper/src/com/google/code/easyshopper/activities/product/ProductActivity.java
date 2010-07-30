@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.productactivity;
+package com.google.code.easyshopper.activities.product;
 
 import java.io.File;
 
@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.SetPriceDialog;
+import com.google.code.easyshopper.activities.SetPriceDialog;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;

@@ -1,8 +1,9 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.main;
 
 import android.app.Activity;
 import android.content.Intent;
 
+import com.google.code.easyshopper.activities.shopping.ShoppingActivity;
 import com.google.code.easyshopper.domain.Shopping;
 
 public class LaunchShoppingActivity {

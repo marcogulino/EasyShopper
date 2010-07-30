@@ -1,10 +1,12 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.google.code.easyshopper.R;
 
 public class MarketsSpinnerAdapter extends ArrayAdapter<MarketSpinnerItem> {
 

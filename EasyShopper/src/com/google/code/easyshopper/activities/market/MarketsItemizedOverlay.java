@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.widget.Toast;
 
 import com.google.android.maps.ItemizedOverlay;
-import com.google.code.easyshopper.MarketActivity.ActivateItem;
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.activities.market.MarketActivity.ActivateItem;
 import com.google.code.easyshopper.domain.Market;
 
 final class MarketsItemizedOverlay extends ItemizedOverlay<MarketOverlayItem> {

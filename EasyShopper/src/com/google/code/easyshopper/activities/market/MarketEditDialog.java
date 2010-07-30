@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
-import com.google.code.easyshopper.MarketActivity.ActivateItem;
+import com.google.code.easyshopper.EditableTextDialog;
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.market.MarketActivity.ActivateItem;
 import com.google.code.easyshopper.db.MarketDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.Market;

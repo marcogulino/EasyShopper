@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.main;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,6 +6,8 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
+import com.google.code.easyshopper.ModelListAdapterItem;
+import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.Shopping;

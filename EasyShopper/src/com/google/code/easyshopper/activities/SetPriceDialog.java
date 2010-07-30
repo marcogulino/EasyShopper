@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities;
 
 import java.util.Currency;
 
@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.R.id;
+import com.google.code.easyshopper.R.layout;
+import com.google.code.easyshopper.R.string;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;

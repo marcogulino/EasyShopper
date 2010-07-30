@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.shopping;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.domain.CartProduct;
 
 public class ProductListAdapterItem extends ProductModelListAdapterItem {

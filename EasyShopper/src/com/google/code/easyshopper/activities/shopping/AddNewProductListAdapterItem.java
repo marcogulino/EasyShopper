@@ -1,17 +1,23 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.shopping;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.EditableTextDialog;
+import com.google.code.easyshopper.ModelListAdapterItem;
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.R.id;
+import com.google.code.easyshopper.R.layout;
+import com.google.code.easyshopper.R.string;
 import com.google.code.easyshopper.domain.Shopping;
 
 public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {

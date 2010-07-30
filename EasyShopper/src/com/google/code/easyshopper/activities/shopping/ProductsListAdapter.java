@@ -1,4 +1,8 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.shopping;
+
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.R.layout;
 
 import android.app.Activity;
 import android.view.View;

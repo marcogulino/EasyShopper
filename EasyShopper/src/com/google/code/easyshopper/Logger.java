@@ -11,12 +11,12 @@ public class Logger {
 		Logger.dbg(object.getClass(), method , message, throwable);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static void dbg(Class clazz, String method, String message) {
 		Log.d(ES.APP_NAME + "/" + clazz.getName() + "::" + method, message);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static void dbg(Class clazz, String method, String message, Throwable throwable) {
 		Log.d(ES.APP_NAME + "/" + clazz.getName() + "::" + method, message, throwable);
 	}

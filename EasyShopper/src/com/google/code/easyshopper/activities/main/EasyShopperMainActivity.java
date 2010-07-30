@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.main;
 
 import java.util.List;
 
@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.ModelListAdapterItem;
+import com.google.code.easyshopper.OnItemLongClickListenerForListAdapter;
+import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.Shopping;

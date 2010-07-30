@@ -1,10 +1,10 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.shopping;
 
 import android.app.Activity;
 import android.content.Intent;
 
+import com.google.code.easyshopper.activities.product.ProductActivity;
 import com.google.code.easyshopper.domain.Shopping;
-import com.google.code.easyshopper.productactivity.ProductActivity;
 
 public class LaunchProductActivity {
 

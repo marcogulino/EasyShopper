@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import android.net.Uri;
 
-import com.google.code.easyshopper.EasyShopperMainActivity;
 import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.activities.main.EasyShopperMainActivity;
 
 public class CameraUtils {
 	public static final String SAVED_PATH = "/sdcard/Android/data/" + EasyShopperMainActivity.class.getPackage().getName();

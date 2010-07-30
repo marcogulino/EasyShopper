@@ -1,9 +1,11 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.shopping;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.SetPriceDialog;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
@@ -14,13 +16,10 @@ public class ActionsOnProduct {
 		public void run(Runnable populator);
 	}
 
-	private final Context context;
-	private boolean confirm=false;
 	private ProductShoppingDBAdapter productShoppingDBAdapter;
 	private final CartProduct cartProduct;
 
 	public ActionsOnProduct(Context context, CartProduct cartProduct) {
-		this.context = context;
 		this.cartProduct = cartProduct;
 		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(context);
 		productShoppingDBAdapter = new ProductShoppingDBAdapter(sqLiteOpenHelper);

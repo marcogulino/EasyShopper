@@ -3,7 +3,7 @@
 	package="com.google.code.easyshopper" android:versionCode="1"
 	android:versionName="1.0">
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name=".EasyShopperMainActivity"
+		<activity android:name=".activities.main.EasyShopperMainActivity"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -11,9 +11,9 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="ShoppingActivity"></activity>
-		<activity android:name=".productactivity.ProductActivity"></activity>
-		<activity android:name="MarketActivity"></activity>
+		<activity android:name=".activities.shopping.ShoppingActivity"></activity>
+		<activity android:name=".activities.product.ProductActivity"></activity>
+		<activity android:name=".activities.market.MarketActivity"></activity>
 		<uses-library android:name="com.google.android.maps" />
 	</application>
 

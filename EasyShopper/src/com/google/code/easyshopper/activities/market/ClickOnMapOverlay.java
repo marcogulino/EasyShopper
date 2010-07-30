@@ -1,4 +1,4 @@
-package com.google.code.easyshopper;
+package com.google.code.easyshopper.activities.market;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -8,6 +8,8 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.R.string;
 
 public class ClickOnMapOverlay extends ItemizedOverlay<OverlayItem> implements LocationRetriever{
 

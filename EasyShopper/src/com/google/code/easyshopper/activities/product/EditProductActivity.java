@@ -32,7 +32,7 @@ import com.google.code.easyshopper.domain.Product;
 import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CameraUtils;
 
-public class ProductActivity extends Activity {
+public class EditProductActivity extends Activity {
 
 	public static final String PARAM_BARCODE = "_BARCODE_";
 	public static final int PRODUCT_SAVED = 100;
@@ -65,7 +65,7 @@ public class ProductActivity extends Activity {
 						}
 					};
 					CartProduct cartProduct = new CartProduct(product, shopping, 1, null);
-					new SetPriceDialog(ProductActivity.this, cartProduct, onOk).show();
+					new SetPriceDialog(EditProductActivity.this, cartProduct, onOk).show();
 				} else {
 					addProductToCart();
 				}
@@ -78,8 +78,8 @@ public class ProductActivity extends Activity {
 			int howMany = productShoppingDBAdapter.countProductForShopping(shopping, product);
 			String text = getResources().getString(R.string.ProductActivity_HowMany).replaceAll("%\\{howmany\\}",
 					String.valueOf(howMany)).replace("%{shoppingList}",
-					shopping.formattedDate(ProductActivity.this));
-			Toast.makeText(ProductActivity.this, text, Toast.LENGTH_SHORT).show();
+					shopping.formattedDate(EditProductActivity.this));
+			Toast.makeText(EditProductActivity.this, text, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -106,7 +106,7 @@ public class ProductActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		logMethod("ProductActivity.onCreate");
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_new_product);
+		setContentView(R.layout.edit_product);
 		final String barcode = getIntent().getExtras().get(PARAM_BARCODE).toString();
 		sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
 		Shopping shopping = new ShoppingDBAdapter(sqLiteOpenHelper).lookUp(getIntent().getExtras().getLong(

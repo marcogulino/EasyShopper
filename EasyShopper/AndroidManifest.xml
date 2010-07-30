@@ -12,7 +12,7 @@
 		</activity>
 
 		<activity android:name=".activities.shopping.ShoppingActivity"></activity>
-		<activity android:name=".activities.product.ProductActivity"></activity>
+		<activity android:name=".activities.product.EditProductActivity"></activity>
 		<activity android:name=".activities.market.MarketActivity"></activity>
 		<uses-library android:name="com.google.android.maps" />
 	</application>

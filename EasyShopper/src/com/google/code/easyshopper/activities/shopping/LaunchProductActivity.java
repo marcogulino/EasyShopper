@@ -3,7 +3,7 @@ package com.google.code.easyshopper.activities.shopping;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.google.code.easyshopper.activities.product.ProductActivity;
+import com.google.code.easyshopper.activities.product.EditProductActivity;
 import com.google.code.easyshopper.domain.Shopping;
 
 public class LaunchProductActivity {
@@ -17,9 +17,9 @@ public class LaunchProductActivity {
 	}
 
 	public void startProductActivity(String barcode) {
-		Intent addNewProduct = new Intent(activity, ProductActivity.class);
-		addNewProduct.putExtra(ProductActivity.PARAM_BARCODE, barcode);
-		addNewProduct.putExtra(ProductActivity.PARAM_SHOPPING, shopping.getId());
+		Intent addNewProduct = new Intent(activity, EditProductActivity.class);
+		addNewProduct.putExtra(EditProductActivity.PARAM_BARCODE, barcode);
+		addNewProduct.putExtra(EditProductActivity.PARAM_SHOPPING, shopping.getId());
 		activity.startActivityForResult(addNewProduct, 0);
 	}
 

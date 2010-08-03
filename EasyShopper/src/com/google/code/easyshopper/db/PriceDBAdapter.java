@@ -37,7 +37,7 @@ public class PriceDBAdapter extends AbstractDBAdapter {
 		id(new Column("id", ColumnType.INTEGER, EasyShopperSqliteOpenHelper.Tables.Prices, true, true)),
 		amount(new Column("amount", ColumnType.INTEGER, Tables.Prices)),
 		currency(new Column("currency", ColumnType.TEXT, Tables.Prices)),
-		product( new Column(Tables.Prices, ProductDBAdapter.Columns.id.column())),
+		product( new Column(Tables.Prices, ProductDBAdapter.Columns.barcode.column())),
 		market(new Column(Tables.Prices, MarketDBAdapter.Columns.id.column()));
 
 		private final Column column;

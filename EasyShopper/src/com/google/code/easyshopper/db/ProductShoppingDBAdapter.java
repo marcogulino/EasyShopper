@@ -36,7 +36,7 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 	public enum Columns{
 		id(new Column("id", ColumnType.INTEGER, Tables.ProductsShoppings, true, true)),
 		shopping(new Column(Tables.ProductsShoppings, ShoppingDBAdapter.Columns.id.column())),
-		product(new Column(Tables.ProductsShoppings, ProductDBAdapter.Columns.id.column())),
+		product(new Column(Tables.ProductsShoppings, ProductDBAdapter.Columns.barcode.column())),
 		actualBarcode(new Column("actual_barcode", ColumnType.TEXT, Tables.ProductsShoppings) );
 		
 		
@@ -69,7 +69,7 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 		SQLiteDatabase writableDatabase = writableDatabase();
 		ContentValues values = new ContentValues();
 		Product product = new ProductDBAdapter(writableDatabase).lookup(barcode);
-		values.put(Columns.product.column().name(), product.getId());
+		values.put(Columns.product.column().name(), product.getBarcode());
 		values.put(Columns.actualBarcode.column().name(), barcode);
 		values.put(Columns.shopping.column().name(), shopping.getId());
 		writableDatabase.insert(Tables.ProductsShoppings.toString(), null, values);
@@ -80,9 +80,9 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 		List<CartProduct> products = new ArrayList<CartProduct>();
 		SQLiteDatabase database = readableDatabase();
 		Join join = Join.inner(Tables.Products, Tables.ProductsShoppings, ProductShoppingDBAdapter.Columns.product.column() );
-		List<QueryColumn> queryColumns=Arrays.asList(Columns.actualBarcode.column(), ProductDBAdapter.Columns.id.column(), ProductDBAdapter.Columns.barcode.column(), ProductDBAdapter.Columns.name.column(), new VirtualColumn("count(*) as cnt"));
+		List<QueryColumn> queryColumns=Arrays.asList(Columns.actualBarcode.column(), ProductDBAdapter.Columns.barcode.column(), ProductDBAdapter.Columns.barcode.column(), ProductDBAdapter.Columns.name.column(), new VirtualColumn("count(*) as cnt"));
 		WhereConditionBuilder where = new Where(ProductShoppingDBAdapter.Columns.shopping.column(), shopping.getId());
-		List<QueryColumn> groupBy = new IncrementalList<QueryColumn>().put(ProductDBAdapter.Columns.id.column());
+		List<QueryColumn> groupBy = new IncrementalList<QueryColumn>().put(ProductDBAdapter.Columns.barcode.column());
 		MyCursor query = new MyCursor(new Query(database).query(join, queryColumns, where, groupBy, null ));
 		
 		while (query.moveToNext()) {
@@ -123,7 +123,7 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 		SQLiteDatabase database = readableDatabase();
 		VirtualColumn countColumn = new VirtualColumn("COUNT (*) as cnt");
 		WhereGroup whereGroup = new WhereGroup(new Where(Columns.shopping.column(), shopping.getId()))
-		.and(new Where(Columns.product.column(), product.getId()));
+		.and(new Where(Columns.product.column(), product.getBarcode()));
 		
 		Cursor query = new Query(database).query(table(), Arrays.asList(countColumn), whereGroup, null, null);
 		query.moveToFirst();

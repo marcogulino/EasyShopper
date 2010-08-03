@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.db.helpers.Orderby.OrderByExtractor;
 import com.google.code.easyshopper.utility.CollectionUtils;
-import com.google.code.easyshopper.utility.StringUtils;
 import com.google.code.easyshopper.utility.CollectionUtils.ValueExtractor;
+import com.google.code.easyshopper.utility.StringUtils;
 
 public class Query {
 

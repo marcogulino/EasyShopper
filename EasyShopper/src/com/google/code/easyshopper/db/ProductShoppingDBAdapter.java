@@ -14,6 +14,8 @@ import android.util.Log;
 import com.google.code.easyshopper.ES;
 import com.google.code.easyshopper.db.domaincreators.ProductCreator;
 import com.google.code.easyshopper.db.helpers.Column;
+import com.google.code.easyshopper.db.helpers.Column.ColumnType;
+import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.Join;
 import com.google.code.easyshopper.db.helpers.MyCursor;
 import com.google.code.easyshopper.db.helpers.Query;
@@ -22,15 +24,13 @@ import com.google.code.easyshopper.db.helpers.VirtualColumn;
 import com.google.code.easyshopper.db.helpers.Where;
 import com.google.code.easyshopper.db.helpers.WhereConditionBuilder;
 import com.google.code.easyshopper.db.helpers.WhereGroup;
-import com.google.code.easyshopper.db.helpers.Column.ColumnType;
-import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Price;
 import com.google.code.easyshopper.domain.Product;
 import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CollectionUtils;
-import com.google.code.easyshopper.utility.IncrementalList;
 import com.google.code.easyshopper.utility.CollectionUtils.ValueExtractor;
+import com.google.code.easyshopper.utility.IncrementalList;
 
 public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 	public enum Columns{

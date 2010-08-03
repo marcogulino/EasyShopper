@@ -12,12 +12,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.code.easyshopper.db.domaincreators.ShoppingCreator;
 import com.google.code.easyshopper.db.helpers.Column;
+import com.google.code.easyshopper.db.helpers.Column.ColumnType;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
+import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.LookUpObject;
 import com.google.code.easyshopper.db.helpers.Orderby;
 import com.google.code.easyshopper.db.helpers.Query;
-import com.google.code.easyshopper.db.helpers.Column.ColumnType;
-import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.domain.Market;
 import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CollectionUtils;

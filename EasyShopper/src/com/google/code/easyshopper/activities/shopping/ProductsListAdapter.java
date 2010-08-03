@@ -1,13 +1,12 @@
 package com.google.code.easyshopper.activities.shopping;
 
-import com.google.code.easyshopper.Logger;
-import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.R.layout;
-
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import com.google.code.easyshopper.Logger;
+import com.google.code.easyshopper.R;
 
 public class ProductsListAdapter extends ArrayAdapter<ProductModelListAdapterItem> {
 

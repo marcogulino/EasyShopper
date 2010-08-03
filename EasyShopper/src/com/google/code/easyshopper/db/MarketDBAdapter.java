@@ -10,11 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.code.easyshopper.db.domaincreators.MarketCreator;
 import com.google.code.easyshopper.db.helpers.Column;
+import com.google.code.easyshopper.db.helpers.Column.ColumnType;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
+import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.LookUpObject;
 import com.google.code.easyshopper.db.helpers.Query;
-import com.google.code.easyshopper.db.helpers.Column.ColumnType;
-import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.domain.Market;
 import com.google.code.easyshopper.utility.CollectionUtils;
 import com.google.code.easyshopper.utility.CollectionUtils.ValueExtractor;

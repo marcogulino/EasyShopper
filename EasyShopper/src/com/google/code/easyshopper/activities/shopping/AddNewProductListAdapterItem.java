@@ -15,9 +15,6 @@ import android.widget.TextView;
 import com.google.code.easyshopper.EditableTextDialog;
 import com.google.code.easyshopper.ModelListAdapterItem;
 import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.R.id;
-import com.google.code.easyshopper.R.layout;
-import com.google.code.easyshopper.R.string;
 import com.google.code.easyshopper.domain.Shopping;
 
 public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {

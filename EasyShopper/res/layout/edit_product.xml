@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="fill_parent"
 	android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:id="@+id/AddNewProductLayout"
-		android:layout_width="fill_parent" android:layout_height="fill_parent"
-		android:gravity="center_horizontal" android:orientation="vertical">
-		<TextView android:text="@string/AddNewProductLabel"
-			android:id="@+id/AddNewProductLabel" android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
-		</TextView>
-		<TextView android:id="@+id/ProductBarcode"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"></TextView>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:orientation="vertical">
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:orientation="horizontal"
+			android:gravity="center_vertical">
+			<ImageView android:clickable="false" android:id="@+id/ProductSmallPicture"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:minWidth="100dp"
+				android:minHeight="100dp"
+				android:maxWidth="100dp"
+				android:maxHeight="100dp"
+				android:adjustViewBounds="true"
+				android:src="@android:drawable/ic_menu_gallery"
+				/>
+			<LinearLayout android:layout_width="fill_parent"
+				android:layout_height="fill_parent" android:orientation="vertical"
+				android:gravity="center_vertical">
+				<TextView android:text="@string/ProductBarcodeLabel"
+					android:layout_width="fill_parent" android:layout_height="wrap_content" />
+				<TextView android:id="@+id/ProductBarcode" android:text="{barcode}"
+					android:layout_width="fill_parent" android:layout_height="wrap_content" />
+			</LinearLayout>
+		</LinearLayout>
 		<EditText android:hint="@string/ProductName" android:id="@+id/ProductName"
 			android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 
@@ -23,9 +37,5 @@
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:minWidth="100dp" />
 		</LinearLayout>
-		<ImageView android:clickable="true" android:id="@+id/ProductPicture"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:adjustViewBounds="true" android:maxWidth="400dp"
-			android:maxHeight="300dp"></ImageView>
 	</LinearLayout>
 </ScrollView>

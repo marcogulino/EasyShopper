@@ -5,7 +5,7 @@
 <string name="AppNameLabel">Easy Shopper</string>
 <string name="NewShoppingMenuItem">New Shopping</string>
 <string name="ScanNewProductLabel">Add Product...</string>
-<string name="AddNewProductLabel">Found New Product</string>
+<string name="ProductBarcodeLabel">Barcode:</string>
 <string name="AddToCartButton">Add to Cart</string>
 <string name="ProductName">Product Description</string>
 <string name="ShoppingDateLabel">Date: </string>

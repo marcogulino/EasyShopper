@@ -5,8 +5,6 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -60,28 +58,6 @@ public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {
 		return activity.getResources().getString(R.string.ScanNewProductLabel);
 	}
 	
-	public static class StartBarcodeScanner extends ModelListAdapterItem {
-		private final Activity activity;
-
-		public StartBarcodeScanner(Activity activity) {
-			this.activity = activity;
-		}
-
-		@Override
-		public void executeOnClick() {
-		    Intent intent = new Intent(SCAN_PRODUCT_ACTION);
-	        intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
-//		    intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
-		    activity.startActivityForResult(intent, 0);
-		}
-
-		@Override
-		protected String label() {
-			return activity.getResources().getString(R.string.ScanBarcode);
-		}
-		
-	}
-	
 	private class ManuallyAddBarcode extends ModelListAdapterItem {
 
 		@Override
@@ -95,29 +71,6 @@ public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {
 			return activity.getResources().getString(R.string.ManuallyAddBarcode);
 		}
 		
-	}
-	
-	private static final class ManuallyAddBarcodeDialog extends EditableTextDialog {
-		private final Activity activity;
-		private final Shopping shopping;
-
-		private ManuallyAddBarcodeDialog(Activity activity, Shopping shopping, String title) {
-			super(activity, title);
-			this.activity = activity;
-			this.shopping = shopping;
-		}
-
-		@Override
-		protected void onCreate(Bundle savedInstanceState) {
-			android.view.View.OnClickListener okButtonListener = new View.OnClickListener() {
-				
-				public void onClick(View paramView) {
-					new LaunchProductActivity(activity, shopping).startProductActivity(getEditText());
-					dismiss();
-				}
-			};
-			onCreate(savedInstanceState, okButtonListener);
-		}
 	}
 
 }

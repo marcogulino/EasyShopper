@@ -9,7 +9,7 @@
 <string name="AddToCartButton">Add to Cart</string>
 <string name="ProductName">Product Description</string>
 <string name="ShoppingDateLabel">Date: </string>
-<string name="MarketLabel">Market: </string>
+<string name="EditProduct_PriceForMarket">Price for market: </string>
 <string name="PickMarket">Select Market</string>
 
 <string name="SuggestBestMarket">Suggest</string>
@@ -42,4 +42,5 @@
 <string name="ProductActivity_HowMany">Added to %{shoppingList}.\n%{howmany} of this product for shopping list</string>
 <string name="UNUSED_Price_Type_Unit">by quantity</string>
 <string name="UNUSED_Price_Type_Weight">by weight</string>
+<string name="MarketLabel">Market:</string>
 </resources>

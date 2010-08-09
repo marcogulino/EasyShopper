@@ -2,7 +2,7 @@ package com.google.code.easyshopper.domain;
 
 public class CartProduct {
 
-	private final Product product;
+	private Product product;
 	private final Shopping shopping;
 	private final long quantity;
 	private final Price price;
@@ -33,6 +33,10 @@ public class CartProduct {
 
 	public Price getPrice() {
 		return price;
+	}
+
+	public void setProduct(Product product) {
+		this.product=product;
 	}
 	
 }

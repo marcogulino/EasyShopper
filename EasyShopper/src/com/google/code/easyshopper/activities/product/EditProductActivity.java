@@ -73,27 +73,14 @@ public class EditProductActivity extends TabActivity {
 
 		createEditProductTab(tabhost, tabContentFactory, barcode, shopping);
 
-		if (shopping.getMarket() != null) {
-			createEditPriceTab(tabhost, tabContentFactory, barcode, shopping);
-		}
-
 		tabhost.setCurrentTab(0);
-	}
-
-	private void createEditPriceTab(TabHost tabhost, TabContentFactory tabContentFactory, final String barcode,
-			Shopping shopping) {
-		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper).priceFor(barcode, shopping.getMarket());
-		editPrice = new EditPrice(this, new CartProduct(product, shopping, 0, currentPrice), null);
-		tabs.put(EditPrice.TAG, editPrice);
-		TabHost.TabSpec price_spec = tabhost.newTabSpec(EditPrice.TAG);
-		price_spec.setContent(tabContentFactory);
-		price_spec.setIndicator("Price");
-		tabhost.addTab(price_spec);
 	}
 
 	private void createEditProductTab(TabHost tabhost, TabContentFactory tabContentFactory, final String barcode,
 			Shopping shopping) {
-		editProduct = new EditProduct(barcode, product, shopping, this, sqLiteOpenHelper);
+		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper).priceFor(barcode, shopping.getMarket());
+
+		editProduct = new EditProduct(barcode, new CartProduct(product, shopping, 0, currentPrice), this, sqLiteOpenHelper);
 		tabs.put(EditProduct.TAG, editProduct);
 		TabHost.TabSpec product_spec = tabhost.newTabSpec(EditProduct.TAG);
 		product_spec.setContent(tabContentFactory);

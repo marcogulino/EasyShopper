@@ -1,6 +1,7 @@
 package com.google.code.easyshopper.activities.product;
 
 import java.io.File;
+import java.util.Currency;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,9 +12,11 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,9 +26,10 @@ import com.google.code.easyshopper.activities.ESTab;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
+import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Market;
-import com.google.code.easyshopper.domain.Product;
+import com.google.code.easyshopper.domain.Price;
 import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CameraUtils;
 
@@ -34,19 +38,22 @@ public class EditProduct implements ESTab {
 	private final Activity activity;
 	private final SQLiteOpenHelper sqLiteOpenHelper;
 	private ImageView productPictureView;
-	private Product product;
+	private final CartProduct cartProduct;
 	private final String barcode;
-	private final Shopping shopping;
 	private View view;
 	private UpdateValues updateOnExit;
+	private Spinner currencySpinner;
+	private ArrayAdapter<CurrencyItem> currencySpinnerAdapter;
+	private EditText editPrice;
 	static final String TAG = "edit_product";
+	private static final String[] currencies=new String[]{"EUR", "USD"};
 
-	public EditProduct(String barcode, Product product, Shopping shopping, Activity activity, SQLiteOpenHelper sqLiteOpenHelper) {
+	public EditProduct(String barcode, CartProduct cartProduct, Activity activity, SQLiteOpenHelper sqLiteOpenHelper) {
 		this.barcode = barcode;
-		this.product = product;
-		this.shopping = shopping;
+		this.cartProduct = cartProduct;
 		this.activity = activity;
 		this.sqLiteOpenHelper = sqLiteOpenHelper;
+		
 	}
 	
 	public View getView() {
@@ -65,16 +72,23 @@ public class EditProduct implements ESTab {
 		Button saveButton = (Button) activity.findViewById(R.id.ProductCRUD_DoneButton);
 		Button addToCart = (Button) activity.findViewById(R.id.AddToCartButton);
 		saveButton.setOnClickListener(new SaveProductListener(productName, barcode));
-		addToCart.setOnClickListener(new AddToCartListener(productName, barcode, shopping));
-		addToCart.setEnabled(shopping.getMarket() != null);
-		productName.setText(product.getName());
-		this.updateOnExit=new UpdateValues() {
-			public void update() {
-				product.setName(productName.getText().toString().trim());
-			}
-			
-		};
-		productPictureView.setImageDrawable(product.getImage().getDrawableForProductDetails(activity));
+		addToCart.setOnClickListener(new AddToCartListener(productName, barcode, cartProduct.getShopping()));
+		
+		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(cartProduct.getShopping().getMarket().getName());
+		
+		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
+		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);
+		currencySpinner.setAdapter(currencySpinnerAdapter);
+		Price currentPrice=cartProduct.getPrice();
+		populateCurrencyCombo(currentPrice);
+		
+		editPrice = (EditText) activity.findViewById(R.id.EditPrice);
+		editPrice.setText(currentPrice!=null?currentPrice.getAmount().getReadableAmount(1):"");
+		
+		// TODO check sul prezzo anzichè sul market
+		addToCart.setEnabled(cartProduct.getShopping().getMarket() != null);
+		productName.setText(cartProduct.getProduct().getName());
+		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
 		productPictureView.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
@@ -92,8 +106,21 @@ public class EditProduct implements ESTab {
 		});	
 	}
 	
+	private void populateCurrencyCombo(Price currentPrice) {
+		CurrencyItem currentCurrency =null;
+		currencySpinnerAdapter.clear();
+		for (String currency : currencies) {
+			CurrencyItem adapter = new CurrencyItem(Currency.getInstance(currency));
+			if(currentPrice!=null && currency.equals(currentPrice.getCurrency().getCurrencyCode())) {
+				currentCurrency=adapter;
+			}
+			currencySpinnerAdapter.add(adapter);
+		}
+		currencySpinner.setSelection(currencySpinnerAdapter.getPosition(currentCurrency));
+	}
+	
 	void cleanProductImage() {
-		if (!product.getImage().hasImage(activity))
+		if (!cartProduct.getProduct().getImage().hasImage(activity))
 			return;
 		try {
 			BitmapDrawable drawable = (BitmapDrawable) productPictureView.getDrawable();
@@ -108,10 +135,19 @@ public class EditProduct implements ESTab {
 	private void saveProduct(String barcode, EditText productName) {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(sqLiteOpenHelper);
 		productDBAdapter.save(barcode, productName.getText().toString().trim());
-		this.product = productDBAdapter.lookup(barcode);
+		cartProduct.setProduct(productDBAdapter.lookup(barcode));
 	}
 	
-
+	public class CurrencyItem {
+		public final Currency currency;
+		public CurrencyItem(Currency instance) {
+			this.currency = instance;
+		}
+		@Override
+		public String toString() {
+			return currency.getSymbol();
+		}
+	}
 	private final class SaveProductListener implements OnClickListener {
 		private final EditText productName;
 		private final String barcode;
@@ -130,6 +166,24 @@ public class EditProduct implements ESTab {
 		}
 	}
 
+	public class SavePrice implements android.view.View.OnClickListener {
+
+		public void onClick(View v) {
+			Price price =cartProduct.getPrice();
+			if(price==null) {
+				price=new Price(-1);
+			}
+			price.setProduct(cartProduct.getProduct());
+			price.setMarket(cartProduct.getShopping().getMarket());
+			price.getAmount().setCurrency(currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency);
+			price.getAmount().setFromReadableAmount(editPrice.getText().toString());
+			new PriceDBAdapter(new EasyShopperSqliteOpenHelper(activity)).saveAndAssociate(price, cartProduct);
+			// TODO what to do here?
+//			runOnOK.run();
+//			SetPriceDialog.this.dismiss();
+		}
+
+	}
 	
 	public class AddToCartListener implements OnClickListener {
 
@@ -156,7 +210,7 @@ public class EditProduct implements ESTab {
 				if (new PriceDBAdapter(sqLiteOpenHelper).priceFor(barcode, market) == null) {
 					Runnable onOk = new AddProductToCart();
 					onOk.run();
-					CartProduct cartProduct = new CartProduct(product, shopping, 1, null);
+//					CartProduct cartProduct = new CartProduct(EditProduct.this.cartProduct.getProduct(), shopping, 1, null);
 					// TODO show setPriceDialog tab instead
 //					new SetPriceDialog(activity, cartProduct, onOk).show();
 				} else {
@@ -168,7 +222,7 @@ public class EditProduct implements ESTab {
 		private void addProductToCart() {
 			ProductShoppingDBAdapter productShoppingDBAdapter = new ProductShoppingDBAdapter(sqLiteOpenHelper);
 			productShoppingDBAdapter.insertNewAssociation(barcode, shopping);
-			int howMany = productShoppingDBAdapter.countProductForShopping(shopping, product);
+			int howMany = productShoppingDBAdapter.countProductForShopping(shopping, cartProduct.getProduct());
 			String text = activity.getResources().getString(R.string.ProductActivity_HowMany).replaceAll("%\\{howmany\\}",
 					String.valueOf(howMany)).replace("%{shoppingList}",
 					shopping.formattedDate(activity));
@@ -179,10 +233,12 @@ public class EditProduct implements ESTab {
 
 	public void refreshProductImage() {
 		cleanProductImage();
-		productPictureView.setImageDrawable(product.getImage().getDrawableForProductDetails(activity));
+		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
 	}
 
 	public void updateValuesOnExit() {
 		if(updateOnExit != null ) updateOnExit.update();
 	}
+	
+	
 }

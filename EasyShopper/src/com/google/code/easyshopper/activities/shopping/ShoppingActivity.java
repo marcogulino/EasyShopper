@@ -5,8 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,31 +62,27 @@ public class ShoppingActivity extends Activity {
 		listView.setOnItemLongClickListener(new OnItemLongClickListenerForListAdapter());
 		dateTextView.setText(shopping.formattedDate(this));
 
-		pickMarketButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				Intent marketActivity = new Intent(ShoppingActivity.this, MarketActivity.class);
-				marketActivity.putExtra(MarketActivity.SHOPPING_ID, shopping.getId());
-				startActivityForResult(marketActivity, MarketActivity.PICK_MARKET);
-			}
-		});
+		pickMarketButton.setOnClickListener(new PickMarketListener(this, shopping));
 	}
 
 	private void populateMainList() {
 		mainMenuListAdapter.clear();
-		mainMenuListAdapter.add(new AddNewProductListAdapterItem(this, shopping));
 		EasyShopperSqliteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
-		Shopping reloadedShopping = new ShoppingDBAdapter(sqLiteOpenHelper).lookUp(shopping.getId());
-		Logger.d(this, "populateMainList", "reloading shopping: old=" + shopping + ", reloaded=" + reloadedShopping);
-		this.shopping = reloadedShopping;
+		this.shopping = new ShoppingDBAdapter(sqLiteOpenHelper).lookUp(shopping.getId());
+		if(shopping.getMarket() == null ) {
+			mainMenuListAdapter.add(new PickMarketListAdapter(this, shopping));
+		} else {
+			mainMenuListAdapter.add(new AddNewProductListAdapterItem(this, shopping));
+		}
 		List<CartProduct> allProducts = new ProductShoppingDBAdapter(sqLiteOpenHelper).allProductsFor(this,
-				reloadedShopping);
+				shopping);
 		int totalItems=0;
 		for (CartProduct product : allProducts) {
 			totalItems+= product.getQuantity();
 			Logger.d(this, "populateMainList", "adding cart item: " + product);
 			mainMenuListAdapter.add(new ProductListAdapterItem(product, this, new PopulateList()));
 		}
-		List<Amount> total = new PriceDBAdapter(sqLiteOpenHelper).calculateTotal(reloadedShopping);
+		List<Amount> total = new PriceDBAdapter(sqLiteOpenHelper).calculateTotal(shopping);
 		String separator = "";
 		String totalLabel = "";
 		for (Amount amount : total) {

@@ -4,7 +4,7 @@ package com.google.code.easyshopper.domain;
 
 
 public class Product {
-	private final String name;
+	private String name;
 	private final String barcode;
 	private ProductImage productImage;
 	
@@ -28,6 +28,10 @@ public class Product {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	@Override

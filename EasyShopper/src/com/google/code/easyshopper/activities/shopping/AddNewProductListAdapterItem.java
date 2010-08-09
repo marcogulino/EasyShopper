@@ -42,7 +42,6 @@ public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {
 		adapter.add(new ManuallyAddBarcode());
 		builder.create().show();
 		if(true) return;
-
 	}
 	
 

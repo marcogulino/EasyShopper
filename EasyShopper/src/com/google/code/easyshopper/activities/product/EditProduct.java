@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.activities.SetPriceDialog;
+import com.google.code.easyshopper.activities.ESTab;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
@@ -29,7 +29,7 @@ import com.google.code.easyshopper.domain.Product;
 import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CameraUtils;
 
-public class EditProduct {
+public class EditProduct implements ESTab {
 
 	private final Activity activity;
 	private final SQLiteOpenHelper sqLiteOpenHelper;
@@ -37,6 +37,9 @@ public class EditProduct {
 	private Product product;
 	private final String barcode;
 	private final Shopping shopping;
+	private View view;
+	private UpdateValues updateOnExit;
+	static final String TAG = "edit_product";
 
 	public EditProduct(String barcode, Product product, Shopping shopping, Activity activity, SQLiteOpenHelper sqLiteOpenHelper) {
 		this.barcode = barcode;
@@ -45,8 +48,15 @@ public class EditProduct {
 		this.activity = activity;
 		this.sqLiteOpenHelper = sqLiteOpenHelper;
 	}
+	
+	public View getView() {
+		if(view==null)
+			view = activity.getLayoutInflater().inflate(R.layout.edit_product, null);
+		return view;
+	}
 
 	public void setup() {
+
 		TextView barcodeTextview = (TextView) activity.findViewById(R.id.ProductBarcode);
 		barcodeTextview.setText(barcode);
 
@@ -54,12 +64,16 @@ public class EditProduct {
 		final EditText productName = (EditText) activity.findViewById(R.id.ProductName);
 		Button saveButton = (Button) activity.findViewById(R.id.ProductCRUD_DoneButton);
 		Button addToCart = (Button) activity.findViewById(R.id.AddToCartButton);
-		if(product==null) product= new Product(barcode);
-
 		saveButton.setOnClickListener(new SaveProductListener(productName, barcode));
 		addToCart.setOnClickListener(new AddToCartListener(productName, barcode, shopping));
 		addToCart.setEnabled(shopping.getMarket() != null);
 		productName.setText(product.getName());
+		this.updateOnExit=new UpdateValues() {
+			public void update() {
+				product.setName(productName.getText().toString().trim());
+			}
+			
+		};
 		productPictureView.setImageDrawable(product.getImage().getDrawableForProductDetails(activity));
 		productPictureView.setOnClickListener(new OnClickListener() {
 
@@ -75,7 +89,7 @@ public class EditProduct {
 				intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
 				activity.startActivityForResult(intent, 1);
 			}
-		});		
+		});	
 	}
 	
 	void cleanProductImage() {
@@ -119,6 +133,12 @@ public class EditProduct {
 	
 	public class AddToCartListener implements OnClickListener {
 
+		private final class AddProductToCart implements Runnable {
+			public void run() {
+				addProductToCart();
+			}
+		}
+
 		private final EditText productName;
 		private final String barcode;
 		private final Shopping shopping;
@@ -134,13 +154,11 @@ public class EditProduct {
 			Market market = shopping.getMarket();
 			if (market != null) {
 				if (new PriceDBAdapter(sqLiteOpenHelper).priceFor(barcode, market) == null) {
-					Runnable onOk = new Runnable() {
-						public void run() {
-							addProductToCart();
-						}
-					};
+					Runnable onOk = new AddProductToCart();
+					onOk.run();
 					CartProduct cartProduct = new CartProduct(product, shopping, 1, null);
-					new SetPriceDialog(activity, cartProduct, onOk).show();
+					// TODO show setPriceDialog tab instead
+//					new SetPriceDialog(activity, cartProduct, onOk).show();
 				} else {
 					addProductToCart();
 				}
@@ -164,4 +182,7 @@ public class EditProduct {
 		productPictureView.setImageDrawable(product.getImage().getDrawableForProductDetails(activity));
 	}
 
+	public void updateValuesOnExit() {
+		if(updateOnExit != null ) updateOnExit.update();
+	}
 }

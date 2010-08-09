@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.activities.SetPriceDialog;
+import com.google.code.easyshopper.activities.EditPrice;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
@@ -57,7 +57,8 @@ public class ActionsOnProduct {
 					Toast.makeText(context, R.string.PleaseChooseMarketFirst, Toast.LENGTH_SHORT).show();
 					return;
 				}
-				new SetPriceDialog(context, cartProduct, populator).show();
+				// TODO rimuovere?
+//				new SetPriceDialog(context, cartProduct, populator).show();
 			}
 		};
 	}

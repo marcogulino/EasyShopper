@@ -10,7 +10,7 @@
 <string name="ProductName">Product Description</string>
 <string name="ShoppingDateLabel">Date: </string>
 <string name="MarketLabel">Market: </string>
-<string name="PickMarket">Select from Map</string>
+<string name="PickMarket">Select Market</string>
 
 <string name="SuggestBestMarket">Suggest</string>
 <string name="Market_AddFromMyLocation">Add from my location</string>

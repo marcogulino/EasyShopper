@@ -2,9 +2,7 @@ package com.google.code.easyshopper.activities;
 
 import java.util.Currency;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.os.Bundle;
+import android.app.Activity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
@@ -19,39 +18,46 @@ import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Market;
 import com.google.code.easyshopper.domain.Price;
 
-public class SetPriceDialog extends Dialog {
+public class EditPrice implements ESTab {
 	private final CartProduct cartProduct;
-	private final Context context;
+	private final Activity activity;
 	private ArrayAdapter<CurrencyItem> currencySpinnerAdapter;
 	private Spinner currencySpinner;
 	private EditText editPrice;
 	private final Runnable runOnOK;
-	public static String[] currencies=new String[]{"EUR", "USD"};
+	private View view;
+	public static final String TAG = "edit_price";
+	private static String[] currencies=new String[]{"EUR", "USD"};
 
-	public SetPriceDialog(Context context, CartProduct cartProduct, Runnable runOnOk) {
-		super(context);
-		this.context = context;
+	public EditPrice(Activity activity, CartProduct cartProduct, Runnable runOnOk) {
+		this.activity = activity;
 		this.cartProduct = cartProduct;
 		this.runOnOK = runOnOk;
 	}
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.setTitle(context.getResources().getString(R.string.Shopping_SetProductPrice));
-		setContentView(R.layout.edit_price_dialog);
-		((TextView) findViewById(R.id.EditPriceDialog_ProductName)).setText(cartProduct.getProduct().getName());
+	
+	public View getView() {
+		if(view == null)
+			view = activity.getLayoutInflater().inflate(R.layout.edit_price_dialog, null);
+		return view;
+	}
+	
+	public void setup() {
+//		this.setTitle(context.getResources().getString(R.string.Shopping_SetProductPrice));
+//		setContentView(R.layout.edit_price_dialog);
+		Logger.d(this, "setup", "cartProduct: " + cartProduct);
+		((TextView) activity.findViewById(R.id.EditPriceDialog_ProductName)).setText(cartProduct.getProduct().getName());
 		Market market = cartProduct.getShopping().getMarket();
-		((TextView) findViewById(R.id.EditPriceDialog_MarketName)).setText(market.getName());
+		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(market.getName());
 		
-		currencySpinner = (Spinner) findViewById(R.id.EditCurrency);
-		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(context, android.R.layout.simple_dropdown_item_1line);
+		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
+		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);
 		currencySpinner.setAdapter(currencySpinnerAdapter);
 		Price currentPrice=cartProduct.getPrice();
 		populateCurrencyCombo(currentPrice);
 		
-		((Button) findViewById(R.id.EditPriceDialog_Cancel)).setOnClickListener(new Cancel());
-		((Button) findViewById(R.id.EditPriceDialog_Ok)).setOnClickListener(new SavePrice());
-		editPrice = (EditText) findViewById(R.id.EditPrice);
+		((Button) activity.findViewById(R.id.EditPriceDialog_Cancel)).setOnClickListener(new Cancel());
+		((Button) activity.findViewById(R.id.EditPriceDialog_Ok)).setOnClickListener(new SavePrice());
+		editPrice = (EditText) activity.findViewById(R.id.EditPrice);
 		editPrice.setText(currentPrice!=null?currentPrice.getAmount().getReadableAmount(1):"");
 	}
 	
@@ -81,15 +87,17 @@ public class SetPriceDialog extends Dialog {
 			price.setMarket(cartProduct.getShopping().getMarket());
 			price.getAmount().setCurrency(currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency);
 			price.getAmount().setFromReadableAmount(editPrice.getText().toString());
-			new PriceDBAdapter(new EasyShopperSqliteOpenHelper(context)).saveAndAssociate(price, cartProduct);
+			new PriceDBAdapter(new EasyShopperSqliteOpenHelper(activity)).saveAndAssociate(price, cartProduct);
 			runOnOK.run();
-			SetPriceDialog.this.dismiss();
+			// TODO what to do here?
+//			SetPriceDialog.this.dismiss();
 		}
 
 	}
 	public class Cancel implements android.view.View.OnClickListener {
 		public void onClick(View v) {
-			SetPriceDialog.this.cancel();
+			// TODO what to do here?
+//			SetPriceDialog.this.cancel();
 		}
 
 	}
@@ -102,5 +110,8 @@ public class SetPriceDialog extends Dialog {
 		public String toString() {
 			return currency.getSymbol();
 		}
+	}
+	public void updateValuesOnExit() {
+		// TODO Auto-generated method stub
 	}
 }

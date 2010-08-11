@@ -31,7 +31,6 @@ public class EditProductActivity extends TabActivity {
 	public static final String PRODUCT_SAVED_ACTION = "PRODUCT_SAVED";
 	public static final String PARAM_SHOPPING = "_shopping_id_";
 	private Product product;
-	private SQLiteOpenHelper sqLiteOpenHelper;
 	private EditProduct editProduct;
 	private Map<String, ESTab> tabs;
 
@@ -62,7 +61,7 @@ public class EditProductActivity extends TabActivity {
 		};
 
 		final String barcode = getIntent().getExtras().get(PARAM_BARCODE).toString();
-		sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
+		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
 		Shopping shopping = new ShoppingDBAdapter(sqLiteOpenHelper).lookUp(getIntent().getExtras().getLong(
 				PARAM_SHOPPING));
 		product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
@@ -75,9 +74,10 @@ public class EditProductActivity extends TabActivity {
 
 	private void createEditProductTab(TabHost tabhost, TabContentFactory tabContentFactory, final String barcode,
 			Shopping shopping) {
-		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper).priceFor(barcode, shopping.getMarket());
+		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
+		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(barcode, shopping.getMarket());
 
-		editProduct = new EditProduct(barcode, new CartProduct(product, shopping, 0, currentPrice), this, sqLiteOpenHelper);
+		editProduct = new EditProduct(barcode, new CartProduct(product, shopping, 0, currentPrice), this);
 		tabs.put(EditProduct.TAG, editProduct);
 		TabHost.TabSpec product_spec = tabhost.newTabSpec(EditProduct.TAG);
 		product_spec.setContent(tabContentFactory);

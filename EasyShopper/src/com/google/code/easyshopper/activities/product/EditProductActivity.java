@@ -3,7 +3,6 @@ package com.google.code.easyshopper.activities.product;
 import java.util.HashMap;
 import java.util.Map;
 
-import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,7 +15,6 @@ import android.widget.TabHost.TabContentFactory;
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.ESTab;
-import com.google.code.easyshopper.activities.EditPrice;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
@@ -35,7 +33,6 @@ public class EditProductActivity extends TabActivity {
 	private Product product;
 	private SQLiteOpenHelper sqLiteOpenHelper;
 	private EditProduct editProduct;
-	private EditPrice editPrice;
 	private Map<String, ESTab> tabs;
 
 	@Override
@@ -91,7 +88,7 @@ public class EditProductActivity extends TabActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		editProduct.cleanProductImage();
+		editProduct.getImageCleaner().clean();
 	}
 
 	@Override

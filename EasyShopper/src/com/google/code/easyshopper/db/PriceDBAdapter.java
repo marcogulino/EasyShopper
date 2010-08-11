@@ -1,7 +1,5 @@
 package com.google.code.easyshopper.db;
 
-import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -17,19 +15,13 @@ import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.LookUpObject;
 import com.google.code.easyshopper.db.helpers.Query;
-import com.google.code.easyshopper.db.helpers.QueryColumn;
-import com.google.code.easyshopper.db.helpers.Table;
-import com.google.code.easyshopper.db.helpers.VirtualColumn;
 import com.google.code.easyshopper.db.helpers.Where;
 import com.google.code.easyshopper.db.helpers.WhereConditionBuilder;
 import com.google.code.easyshopper.db.helpers.WhereGroup;
-import com.google.code.easyshopper.domain.Amount;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Market;
 import com.google.code.easyshopper.domain.Price;
-import com.google.code.easyshopper.domain.Shopping;
 import com.google.code.easyshopper.utility.CollectionUtils;
-import com.google.code.easyshopper.utility.IncrementalList;
 
 public class PriceDBAdapter extends AbstractDBAdapter {
 
@@ -105,31 +97,6 @@ public class PriceDBAdapter extends AbstractDBAdapter {
 		return price;
 	}
 
-	public List<Amount> calculateTotal(Shopping shopping) {
-		SQLiteDatabase database = readableDatabase();
-		ArrayList<Amount> prices = new ArrayList<Amount>();
-
-		List<Table> tables = new IncrementalList<Table>().put(Tables.Prices).put(Tables.ProductsShoppings);
-
-		Column currency = Columns.currency.column();
-
-		List<QueryColumn> queryColumns = new IncrementalList<QueryColumn>().put(
-				new VirtualColumn("SUM(amount) as total_amount")).put(currency);
-
-		String marketId = String.valueOf(shopping.getMarket() != null ? shopping.getMarket().getId() : -1);
-		WhereGroup where = new WhereGroup(new Where(ProductShoppingDBAdapter.Columns.shopping.column(), shopping
-				.getId())).and(new Where(PriceDBAdapter.Columns.market.column(), marketId));
-
-		List<QueryColumn> groupBy = new IncrementalList<QueryColumn>().put(currency);
-
-		Cursor query = new Query(database).query(tables, queryColumns, where, groupBy, null);
-		while (query.moveToNext()) {
-			prices.add(new Amount(query.getLong(0), Currency.getInstance(query.getString(1))));
-		}
-		query.close();
-		closeDatabaseIfSafe(database);
-		return prices;
-	}
 
 	public Price priceFor(String barcode, Market market) {
 		SQLiteDatabase database = readableDatabase();

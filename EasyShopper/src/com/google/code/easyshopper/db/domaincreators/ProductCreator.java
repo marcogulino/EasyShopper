@@ -12,7 +12,10 @@ public class ProductCreator implements DomainObjectCreator<Product> {
 		MyCursor query = new MyCursor(cursor);
 		String barcode = query.getString(Columns.barcode.column());
 		String productName = query.getString(Columns.name.column());
-		return new Product(barcode, productName);
+		Product product = new Product(barcode, productName);
+		int numberOfPriceChars=query.getInt(Columns.barcodePriceChars.column());
+		product.setNumberOfPriceCharacters(numberOfPriceChars);
+		return product;
 	}
 
 }

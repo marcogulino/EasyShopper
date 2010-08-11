@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.ESTab;
 import com.google.code.easyshopper.activities.RadioGroupWrapper;
@@ -25,7 +26,6 @@ public class EditProduct implements ESTab {
 	private final Activity activity;
 	private ImageView productPictureView;
 	private final CartProduct cartProduct;
-	private final String barcode;
 	private View view;
 	private UpdateValues updateOnExit;
 	private Spinner currencySpinner;
@@ -37,11 +37,11 @@ public class EditProduct implements ESTab {
 	private static final String[] currencies = new String[] { "EUR", "USD" };
 	private EditText productName;
 
-	public EditProduct(String barcode, CartProduct cartProduct, Activity activity) {
-		this.barcode = barcode;
+	public EditProduct(CartProduct cartProduct, Activity activity) {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
 		this.productSaver=new ProductSaver(cartProduct, activity);
+		Logger.d(this, "EditProduct", "CartProduct: " + cartProduct);
 	}
 
 	public void refreshProductImage() {
@@ -63,7 +63,7 @@ public class EditProduct implements ESTab {
 	public void setup() {
 
 		TextView barcodeTextview = (TextView) activity.findViewById(R.id.ProductBarcode);
-		barcodeTextview.setText(barcode);
+		barcodeTextview.setText(cartProduct.getFullBarcode());
 
 		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
 		Price currentPrice = cartProduct.getPrice();
@@ -84,12 +84,12 @@ public class EditProduct implements ESTab {
 				return currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency;
 			}
 		};
-		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, barcode, currencyRetriever , activity);
+		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, cartProduct, currencyRetriever , activity);
 		editPrice.addTextChangedListener(setKilosForProductListener );
-		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, barcode, currencyRetriever);
+		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever);
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
-		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, barcode, priceTypeRetriever, currencyRetriever, productSaver, activity));
-		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, priceTypeRetriever, currencyRetriever, barcode, cartProduct.getShopping(), productSaver, activity));
+		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, currencyRetriever, productSaver, activity));
+		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, productSaver, activity));
 
 		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(cartProduct.getShopping().getMarket().getName());
 
@@ -98,7 +98,7 @@ public class EditProduct implements ESTab {
 		populateCurrencyCombo(currentPrice);
 
 		if(cartProduct.getProduct().isPriceDefinedInBarcode()) {
-			productPriceType.check(R.id.PriceTypeUnit);
+			productPriceType.check(R.id.PriceTypeWeight);
 		}
 
 		// TODO check sul prezzo anzichè sul market

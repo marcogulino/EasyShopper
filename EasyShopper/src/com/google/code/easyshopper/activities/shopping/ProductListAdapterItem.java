@@ -42,12 +42,12 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 		longClickActions.put(removeFromCart, actionsOnProduct.removeAllAction());
 		longClickActions.put(removeAllQuantitiesFromCart, actionsOnProduct.removeAllAction());
 		longClickActions.put(decreaseByOne, actionsOnProduct.decreaseByOneAction());
-		longClickActions.put(setPrice, actionsOnProduct.setPriceAction(activity));
+//		longClickActions.put(setPrice, actionsOnProduct.setPriceAction(activity));
 	}
 
 	public void executeOnClick() {
 		Logger.d(this, "executeOnClick", "" + cartProduct);
-		new LaunchProductActivity(activity, cartProduct.getShopping()).startProductActivity(cartProduct.getProduct().getBarcode());
+		new LaunchProductActivity(activity, cartProduct.getShopping()).startProductActivity(cartProduct.getFullBarcode());
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 		View mainView = activity.getLayoutInflater().inflate(R.layout.products_item_layout, null);
 		((TextView) mainView.findViewById(R.id.ProductName)).setText(label());
 		long quantity = cartProduct.getQuantity();
-		String pricePerQuantity = cartProduct.getPrice() != null ? quantity + "x " + priceLabel(1) : "";
+		String pricePerQuantity = cartProduct.calculatePriceAmount() != null ? quantity + "x " + priceLabel(1) : "";
 		String totalPrice = quantity>1 ? priceLabel(quantity): "";
 		((TextView) mainView.findViewById(R.id.ProductPriceQuantity)).setText(pricePerQuantity);
 		((TextView) mainView.findViewById(R.id.ProductPrice)).setText(totalPrice);
@@ -93,7 +93,7 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 	}
 
 	private String priceLabel(long quantity) {
-		String price = cartProduct.getPrice() == null ? "" : cartProduct.getPrice().getAmount().getReadableAmountLabel(quantity);
+		String price = cartProduct.calculatePriceAmount() == null ? "" : cartProduct.calculatePriceAmount().getReadableAmountLabel(quantity);
 		return price;
 	}
 }

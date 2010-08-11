@@ -65,13 +65,14 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 	}
 	
 
-	public void insertNewAssociation(String barcode, Shopping shopping) {
+	public void insertNewAssociation(CartProduct cartProduct) {
 		SQLiteDatabase writableDatabase = writableDatabase();
 		ContentValues values = new ContentValues();
-		Product product = new ProductDBAdapter(writableDatabase).lookup(barcode);
+//		Product product = new ProductDBAdapter(writableDatabase).lookup(cartProduct.getFullBarcode());
+		Product product = cartProduct.getProduct();
 		values.put(Columns.product.column().name(), product.getBarcode());
-		values.put(Columns.actualBarcode.column().name(), barcode);
-		values.put(Columns.shopping.column().name(), shopping.getId());
+		values.put(Columns.actualBarcode.column().name(), cartProduct.getFullBarcode());
+		values.put(Columns.shopping.column().name(), cartProduct.getShopping().getId());
 		writableDatabase.insert(Tables.ProductsShoppings.toString(), null, values);
 		closeDatabaseIfSafe(writableDatabase);
 	}
@@ -92,7 +93,7 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 				price = new PriceDBAdapter(database).priceFor(product.getBarcode(), shopping.getMarket());
 			}
 
-			products.add(new CartProduct(product, shopping, query.getLong(new VirtualColumn("cnt")), price));
+			products.add(new CartProduct(query.getString(Columns.actualBarcode.column()), product, shopping, query.getLong(new VirtualColumn("cnt")), price));
 		}
 		query.close();
 		closeDatabaseIfSafe(database);

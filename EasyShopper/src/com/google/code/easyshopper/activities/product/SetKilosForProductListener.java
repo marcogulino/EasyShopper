@@ -11,18 +11,19 @@ import android.widget.TextView;
 
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.domain.Amount;
+import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.utility.StringUtils;
 
 public class SetKilosForProductListener implements TextWatcher {
 
 	private final PriceTypeRetriever priceTypeRetriever;
 	private final Activity activity;
-	private final String barcode;
 	private final CurrencyRetriever currencyRetriever;
+	private final CartProduct cartProduct;
 
-	public SetKilosForProductListener(PriceTypeRetriever priceTypeRetriever, String barcode, CurrencyRetriever currencyRetriever, Activity activity) {
+	public SetKilosForProductListener(PriceTypeRetriever priceTypeRetriever, CartProduct cartProduct, CurrencyRetriever currencyRetriever, Activity activity) {
 		this.priceTypeRetriever = priceTypeRetriever;
-		this.barcode = barcode;
+		this.cartProduct = cartProduct;
 		this.currencyRetriever = currencyRetriever;
 		this.activity = activity;
 	}
@@ -38,7 +39,7 @@ public class SetKilosForProductListener implements TextWatcher {
 		String priceByKilos = StringUtils.editTextToString((EditText) activity.findViewById(R.id.EditPrice));
 		if(priceByKilos.length() == 0) return;
 		Currency currency = currencyRetriever.currency();
-		Amount productPrice = priceTypeRetriever.getPrice(barcode, currency);
+		Amount productPrice = cartProduct.calculatePriceAmount(currency);
 		Amount priceAmountByKilos=new Amount().setCurrency(currency).setFromReadableAmount(priceByKilos);
 		TextView kilosLabel = (TextView) activity.findViewById(R.id.ProductWeightLabel);
 		if(priceAmountByKilos.getAmount() == 0) {

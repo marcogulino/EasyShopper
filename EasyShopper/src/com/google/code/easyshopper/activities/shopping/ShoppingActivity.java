@@ -1,6 +1,9 @@
 package com.google.code.easyshopper.activities.shopping;
 
+import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -77,20 +80,32 @@ public class ShoppingActivity extends Activity {
 		List<CartProduct> allProducts = new ProductShoppingDBAdapter(sqLiteOpenHelper).allProductsFor(this,
 				shopping);
 		int totalItems=0;
+		Map<Currency, Amount> totals=new HashMap<Currency, Amount>();
 		for (CartProduct product : allProducts) {
 			totalItems+= product.getQuantity();
 			Logger.d(this, "populateMainList", "adding cart item: " + product);
 			mainMenuListAdapter.add(new ProductListAdapterItem(product, this, new PopulateList()));
+			addPriceToTotal(product, totals);
 		}
-		List<Amount> total = new PriceDBAdapter(sqLiteOpenHelper).calculateTotal(shopping);
 		String separator = "";
 		String totalLabel = "";
-		for (Amount amount : total) {
-			totalLabel += separator + amount.getReadableAmountLabel(1);
+		for (Currency currency : totals.keySet()) {
+			totalLabel += separator + totals.get(currency).getReadableAmountLabel(1);
 			separator = "\n";
 		}
 		((TextView) findViewById(R.id.PriceTotal)).setText(totalLabel);
 		((TextView) findViewById(R.id.TotalItems)).setText(String.valueOf(totalItems));
+	}
+
+	private void addPriceToTotal(CartProduct product, Map<Currency, Amount> totals) {
+		Currency currency = product.getPrice().getCurrency();
+		Amount currentAmount = totals.get(currency);
+		if(currentAmount==null) {
+			currentAmount=new Amount(0, currency);
+			totals.put(currency, currentAmount);
+		}
+		long partial = product.calculatePriceAmount().getAmount() * product.getQuantity();
+		currentAmount.setAmount(partial + currentAmount.getAmount());
 	}
 
 	@Override

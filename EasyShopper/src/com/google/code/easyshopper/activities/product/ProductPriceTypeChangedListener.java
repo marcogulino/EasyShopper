@@ -1,8 +1,5 @@
 package com.google.code.easyshopper.activities.product;
 
-import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.domain.Amount;
-
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
@@ -11,17 +8,21 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.domain.Amount;
+import com.google.code.easyshopper.domain.CartProduct;
+
 public class ProductPriceTypeChangedListener implements OnCheckedChangeListener {
 
 	private final PriceTypeRetriever priceTypeRetriever;
 	private final CurrencyRetriever currencyRetriever;
-	private final String barcode;
 	private final Activity activity;
+	private final CartProduct cartProduct;
 
-	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, String barcode, CurrencyRetriever currencyRetriever) {
+	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.activity = activity;
-		this.barcode = barcode;
+		this.cartProduct = cartProduct;
 		this.currencyRetriever = currencyRetriever;
 	}
 
@@ -29,6 +30,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 		EditText editPrice=(EditText) activity.findViewById(R.id.EditPrice);
 		TableLayout priceDetailsTable=(TableLayout) activity.findViewById(R.id.PriceDetailsTable);
 		TextView productPriceLabel=(TextView) activity.findViewById(R.id.ProductPriceLabel);
+		cartProduct.getProduct().setNumberOfPriceCharacters(priceTypeRetriever.priceBarcodeChars());
 		
 		boolean priceIsInBarcode = priceTypeRetriever.priceIsInBarcode();
 		
@@ -37,7 +39,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 		
 		if(priceIsInBarcode) {
 			editPrice.setText("");
-			Amount price = priceTypeRetriever.getPrice(barcode, currencyRetriever.currency());
+			Amount price = cartProduct.calculatePriceAmount(currencyRetriever.currency());
 			String priceAsLabel = price.getReadableAmount(1);
 			productPriceLabel.setText(priceAsLabel);
 		}

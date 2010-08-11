@@ -66,6 +66,7 @@ public class EditProductActivity extends TabActivity {
 				PARAM_SHOPPING));
 		product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
 		if(product==null) product= new Product(barcode);
+		Logger.d(this, "onCreate", "product: " + product);
 
 		createEditProductTab(tabhost, tabContentFactory, barcode, shopping);
 
@@ -75,9 +76,9 @@ public class EditProductActivity extends TabActivity {
 	private void createEditProductTab(TabHost tabhost, TabContentFactory tabContentFactory, final String barcode,
 			Shopping shopping) {
 		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
-		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(barcode, shopping.getMarket());
+		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(product.getBarcode(), shopping.getMarket());
 
-		editProduct = new EditProduct(barcode, new CartProduct(product, shopping, 0, currentPrice), this);
+		editProduct = new EditProduct(new CartProduct(barcode, product, shopping, 0, currentPrice), this);
 		tabs.put(EditProduct.TAG, editProduct);
 		TabHost.TabSpec product_spec = tabhost.newTabSpec(EditProduct.TAG);
 		product_spec.setContent(tabContentFactory);

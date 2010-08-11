@@ -4,6 +4,7 @@ import java.util.Currency;
 
 import android.app.Activity;
 
+import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
@@ -22,10 +23,11 @@ public class ProductSaver {
 		
 	}
 	
-	public void save(String barcode, String productName, int numberOfPriceChars, Currency currency, String priceString) {
+	public void save(String productName, Currency currency, String priceString) {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(new EasyShopperSqliteOpenHelper(activity));
-		productDBAdapter.save(barcode.substring(0, barcode.length()-numberOfPriceChars), productName, numberOfPriceChars);
-		cartProduct.setProduct(productDBAdapter.lookup(barcode));
+		Logger.d(this, "save", "Saving cartproduct: " + cartProduct + ", with name: " + productName);
+		productDBAdapter.save(cartProduct.getBarcodeForProduct(), productName, cartProduct.getProduct().getNumberOfPriceCharacters());
+		cartProduct.setProduct(productDBAdapter.lookup(cartProduct.getBarcodeForProduct()));
 		Price price = cartProduct.getPrice();
 		if (price == null ) {
 			price = new Price(-1);

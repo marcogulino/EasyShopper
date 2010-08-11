@@ -22,12 +22,12 @@ public class ProductSaver {
 		
 	}
 	
-	public void save(String barcode, String productName, Currency currency, String priceString) {
+	public void save(String barcode, String productName, int numberOfPriceChars, Currency currency, String priceString) {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(new EasyShopperSqliteOpenHelper(activity));
-		productDBAdapter.save(barcode, productName);
+		productDBAdapter.save(barcode.substring(0, barcode.length()-numberOfPriceChars), productName, numberOfPriceChars);
 		cartProduct.setProduct(productDBAdapter.lookup(barcode));
 		Price price = cartProduct.getPrice();
-		if (price == null) {
+		if (price == null ) {
 			price = new Price(-1);
 		}
 		price.setProduct(cartProduct.getProduct());

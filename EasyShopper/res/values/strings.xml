@@ -40,7 +40,13 @@
 <string name="Done">Done</string>
 <string name="TotalItemsLabel">Total items on cart</string>
 <string name="ProductActivity_HowMany">Added to %{shoppingList}.\n%{howmany} of this product for shopping list</string>
-<string name="UNUSED_Price_Type_Unit">by quantity</string>
-<string name="UNUSED_Price_Type_Weight">by weight</string>
+<string name="Price_Type_Unit">Price by quantity</string>
+<string name="Price_Type_Weight">Price by weight</string>
 <string name="MarketLabel">Market:</string>
+
+<string name="Price">Price:</string>
+<string name="Kilos">Kilos:</string>
+<string name="PriceForUnit">Price for unit</string>
+<string name="PriceForKilos">Price for kilogram</string>
+<string name="N_A">N/A</string>
 </resources>

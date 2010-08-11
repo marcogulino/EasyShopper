@@ -23,21 +23,48 @@
 		android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:orientation="horizontal">
-		<TextView android:text="@string/EditProduct_PriceForMarket"
+		<TextView android:text="@string/EditProduct_PriceForMarket" android:id="@+id/EditProduct_PriceLabel"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<TextView android:text="{market name}" android:id="@+id/EditPriceDialog_MarketName"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
 
 	<LinearLayout android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:orientation="horizontal">
+		android:weightSum="1" android:layout_height="wrap_content"
+		android:orientation="horizontal">
 		<EditText android:text="" android:id="@+id/EditPrice"
-			android:minWidth="200dp" android:layout_width="wrap_content"
+				android:hint="@string/PriceForUnit"
+		
+			android:layout_weight="0.9" android:layout_width="wrap_content"
 			android:layout_height="wrap_content" android:numeric="decimal" />
-		<Spinner android:id="@+id/EditCurrency" android:layout_width="fill_parent"
-			android:layout_height="48dp"></Spinner>
+		<Spinner android:id="@+id/EditCurrency" android:layout_width="wrap_content"
+			android:layout_weight="0.1" android:layout_height="48dp"></Spinner>
 	</LinearLayout>
 
+	<RadioGroup android:id="@+id/PriceType"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<RadioButton android:text="@string/Price_Type_Unit"
+			android:id="@+id/PriceTypeUnit" android:checked="true"
+			android:layout_width="fill_parent" android:layout_height="wrap_content" />
+		<RadioButton android:text="@string/Price_Type_Weight"
+			android:id="@+id/PriceTypeWeight" android:layout_width="fill_parent"
+			android:layout_height="wrap_content" />
+	</RadioGroup>
+	<TableLayout android:id="@+id/PriceDetailsTable"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+		<TableRow>
+			<TextView android:text="@string/Price"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+			<TextView android:text="{price}" android:id="@+id/ProductPriceLabel"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		</TableRow>
+		<TableRow>
+			<TextView android:text="@string/Kilos"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+			<TextView android:text="@string/N_A" android:id="@+id/ProductWeightLabel"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+		</TableRow>
+	</TableLayout>
 	<LinearLayout android:layout_width="fill_parent"
 		android:layout_height="fill_parent" android:gravity="bottom"
 		android:orientation="horizontal">
@@ -50,7 +77,10 @@
 			<Button android:text="@string/Done" android:id="@+id/ProductCRUD_DoneButton"
 				android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:minWidth="100dp" />
-		
-</LinearLayout>
+
+		</LinearLayout>
 	</LinearLayout>
+
+
+
 </LinearLayout>

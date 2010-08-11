@@ -10,11 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.ESTab;
+import com.google.code.easyshopper.activities.RadioGroupWrapper;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Price;
 
@@ -63,13 +65,16 @@ public class EditProduct implements ESTab {
 		TextView barcodeTextview = (TextView) activity.findViewById(R.id.ProductBarcode);
 		barcodeTextview.setText(barcode);
 
+		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
 		Price currentPrice = cartProduct.getPrice();
 		editPrice = (EditText) activity.findViewById(R.id.EditPrice);
-		editPrice.setText(currentPrice != null ? currentPrice.getAmount().getReadableAmount(1) : "");
 		Button saveButton = (Button) activity.findViewById(R.id.ProductCRUD_DoneButton);
 		Button addToCart = (Button) activity.findViewById(R.id.AddToCartButton);
 		productPictureView = (ImageView) activity.findViewById(R.id.ProductSmallPicture);
 		productName = (EditText) activity.findViewById(R.id.ProductName);
+		RadioGroup productPriceType = (RadioGroup) activity.findViewById(R.id.PriceType);
+		
+		PriceTypeRetriever priceTypeRetriever = new PriceTypeRetrieverFromRadio(new RadioGroupWrapper(productPriceType));
 
 		productName.addTextChangedListener(new ButtonsEnablerWatcher(saveButton, addToCart, editPrice));
 		editPrice.addTextChangedListener(new ButtonsEnablerWatcher(saveButton, addToCart, productName) );
@@ -79,16 +84,22 @@ public class EditProduct implements ESTab {
 				return currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency;
 			}
 		};
-		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, barcode, currencyRetriever, productSaver, activity));
-		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, barcode, cartProduct.getShopping(), productSaver, activity));
+		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, barcode, currencyRetriever , activity);
+		editPrice.addTextChangedListener(setKilosForProductListener );
+		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, barcode, currencyRetriever);
+		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
+		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, barcode, priceTypeRetriever, currencyRetriever, productSaver, activity));
+		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, priceTypeRetriever, currencyRetriever, barcode, cartProduct.getShopping(), productSaver, activity));
 
 		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(cartProduct.getShopping().getMarket().getName());
 
-		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
 		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);
 		currencySpinner.setAdapter(currencySpinnerAdapter);
 		populateCurrencyCombo(currentPrice);
 
+		if(cartProduct.getProduct().isPriceDefinedInBarcode()) {
+			productPriceType.check(R.id.PriceTypeUnit);
+		}
 
 		// TODO check sul prezzo anzichè sul market
 		addToCart.setEnabled(cartProduct.getShopping().getMarket() != null);
@@ -96,6 +107,10 @@ public class EditProduct implements ESTab {
 		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
 		this.imageCleaner = new ProductImageCleaner();
 		productPictureView.setOnClickListener(new GrabImageLauncher(cartProduct.getProduct().getBarcode(), imageCleaner, activity));
+		productPriceTypeChangedListener.onCheckedChanged(null, 0);
+		setKilosForProductListener.onTextChanged(null, 0, 0, 0);
+		editPrice.setText(currentPrice != null ? currentPrice.getAmount().getReadableAmount(1) : "");
+
 	}
 
 	public ImageCleaner getImageCleaner() {

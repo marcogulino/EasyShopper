@@ -22,11 +22,13 @@ public class AddToCartListener implements OnClickListener {
 	private final Activity activity;
 	private final CartProduct cartProduct;
 	private final CurrencyRetriever currencyRetriever;
+	private final PriceTypeRetriever priceTypeRetriever;
 
-	public AddToCartListener(CartProduct cartProduct, EditText productName, EditText editPrice, CurrencyRetriever currencyRetriever, String barcode, Shopping shopping, ProductSaver productSaver, Activity activity) {
+	public AddToCartListener(CartProduct cartProduct, EditText productName, EditText editPrice, PriceTypeRetriever priceTypeRetriever, CurrencyRetriever currencyRetriever, String barcode, Shopping shopping, ProductSaver productSaver, Activity activity) {
 		this.cartProduct = cartProduct;
 		this.productName = productName;
 		this.editPrice = editPrice;
+		this.priceTypeRetriever = priceTypeRetriever;
 		this.currencyRetriever = currencyRetriever;
 		this.barcode = barcode;
 		this.shopping = shopping;
@@ -35,7 +37,7 @@ public class AddToCartListener implements OnClickListener {
 	}
 
 	public void onClick(View v) {
-		productSaver.save(this.barcode, StringUtils.editTextToString(this.productName), currencyRetriever.currency(), StringUtils.editTextToString(editPrice));
+		productSaver.save(this.barcode, StringUtils.editTextToString(this.productName), priceTypeRetriever.priceBarcodeChars(), currencyRetriever.currency(), StringUtils.editTextToString(editPrice));
 		addProductToCart();
 	}
 

@@ -29,8 +29,9 @@ public class Amount {
 		this.amount = amount;
 	}
 
-	public void setCurrency(Currency currency) {
+	public Amount setCurrency(Currency currency) {
 		this.currency = currency;
+		return this;
 	}
 
 	public String getReadableAmount(long quantity) {
@@ -52,10 +53,10 @@ public class Amount {
 		return "" + intPart + getSeparator() + fractPartAsString.substring(0, defaultFractionDigits);
 	}
 
-	public void setFromReadableAmount(String amount) {
+	public Amount setFromReadableAmount(String amount) {
 		if (amount.indexOf(getSeparator()) < 0) {
 			this.amount = Long.parseLong(amount) * scaleFactor();
-			return;
+			return this;
 		}
 		int separatorIndex = amount.indexOf(getSeparator());
 		long intPart = Long.parseLong(amount.substring(0, separatorIndex)) * scaleFactor();
@@ -63,13 +64,14 @@ public class Amount {
 		long decimalPart = Long.parseLong(originalDecimalPart.concat("00000").substring(0,
 				currency.getDefaultFractionDigits()));
 		this.amount = intPart + decimalPart;
+		return this;
 	}
 
 	private long scaleFactor() {
 		return (long) Math.pow(10, currency.getDefaultFractionDigits());
 	}
 
-	private char getSeparator() {
+	public char getSeparator() {
 		return '.';
 		// DecimalFormat decimalFormat = (DecimalFormat)
 		// DecimalFormat.getInstance(Locale.getDefault());
@@ -83,5 +85,12 @@ public class Amount {
 
 	public String getReadableAmountLabel(long quantity) {
 		return getReadableAmount(quantity) + " " + currency.getSymbol();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if( o==null || ! (o instanceof Amount) ) return false;
+		Amount other = ((Amount)o);
+		return other.amount == amount && other.currency.equals(currency);
 	}
 }

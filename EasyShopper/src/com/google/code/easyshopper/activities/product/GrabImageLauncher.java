@@ -36,6 +36,6 @@ public class GrabImageLauncher implements OnClickListener {
 		Logger.d(this, "onClick", "trying to save to file: " + savePath);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, savePath);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
-		activity.startActivityForResult(intent, 1);
+		activity.startActivityForResult(intent, 0);
 	}
 }

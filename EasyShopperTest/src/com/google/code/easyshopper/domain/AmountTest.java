@@ -4,8 +4,6 @@ import java.util.Currency;
 
 import android.test.AndroidTestCase;
 
-import com.google.code.easyshopper.domain.Amount;
-
 
 public class AmountTest extends AndroidTestCase {
 

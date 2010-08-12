@@ -1,22 +1,12 @@
 package com.google.code.easyshopper.activities;
 
-import java.util.Currency;
-
 import android.app.Activity;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.code.easyshopper.Logger;
-import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.db.PriceDBAdapter;
-import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
-import com.google.code.easyshopper.domain.Market;
-import com.google.code.easyshopper.domain.Price;
 
 public class EditPrice implements ESTab {
 	private final CartProduct cartProduct;

@@ -14,8 +14,8 @@ import com.google.code.easyshopper.db.helpers.LookUpObject;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.domain.Product;
 import com.google.code.easyshopper.utility.CollectionUtils;
-import com.google.code.easyshopper.utility.StringUtils;
 import com.google.code.easyshopper.utility.CollectionUtils.ValueExtractor;
+import com.google.code.easyshopper.utility.StringUtils;
 
 public class ProductDBAdapter extends AbstractDBAdapter {
 

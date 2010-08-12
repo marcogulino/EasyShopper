@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.activities.EditPrice;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;

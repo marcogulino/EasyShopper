@@ -16,7 +16,6 @@ import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.OnItemLongClickListenerForListAdapter;
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.market.MarketActivity;
-import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;

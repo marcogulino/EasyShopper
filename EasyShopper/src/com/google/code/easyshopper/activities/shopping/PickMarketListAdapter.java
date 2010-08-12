@@ -1,12 +1,12 @@
 package com.google.code.easyshopper.activities.shopping;
 
-import com.google.code.easyshopper.R;
-import com.google.code.easyshopper.domain.Shopping;
-
 import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.domain.Shopping;
 
 public class PickMarketListAdapter extends ProductModelListAdapterItem {
 

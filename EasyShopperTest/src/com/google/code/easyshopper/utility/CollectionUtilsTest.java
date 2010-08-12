@@ -2,7 +2,6 @@ package com.google.code.easyshopper.utility;
 
 import android.test.AndroidTestCase;
 
-import com.google.code.easyshopper.utility.CollectionUtils;
 import com.google.code.easyshopper.utility.CollectionUtils.ValueExtractor;
 
 public class CollectionUtilsTest extends AndroidTestCase {

@@ -2,8 +2,6 @@ package com.google.code.easyshopper.utility;
 
 import android.net.Uri;
 import android.test.AndroidTestCase;
-
-import com.google.code.easyshopper.utility.CameraUtils;
 public class CameraUtilsTest extends AndroidTestCase {
 
 	public void testPathComposition() {

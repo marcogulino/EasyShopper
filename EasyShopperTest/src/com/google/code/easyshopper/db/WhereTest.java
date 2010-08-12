@@ -4,9 +4,9 @@ package com.google.code.easyshopper.db;
 import android.test.AndroidTestCase;
 
 import com.google.code.easyshopper.db.helpers.Column;
-import com.google.code.easyshopper.db.helpers.Where;
 import com.google.code.easyshopper.db.helpers.Column.ColumnType;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
+import com.google.code.easyshopper.db.helpers.Where;
 
 public class WhereTest extends AndroidTestCase {
 

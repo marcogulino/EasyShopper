@@ -18,12 +18,14 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 	private final CurrencyRetriever currencyRetriever;
 	private final Activity activity;
 	private final CartProduct cartProduct;
+	private final ImageCleaner cleaner;
 
-	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever) {
+	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, ImageCleaner cleaner) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.activity = activity;
 		this.cartProduct = cartProduct;
 		this.currencyRetriever = currencyRetriever;
+		this.cleaner = cleaner;
 	}
 
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -43,6 +45,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 			String priceAsLabel = price.getReadableAmount(1);
 			productPriceLabel.setText(priceAsLabel);
 		}
+		cleaner.refresh();
 	}
 
 }

@@ -25,9 +25,10 @@ public class CameraUtils {
 	    devices.add("htc_wwe/htc_bravo/bravo");
 
 	    String myDevice = android.os.Build.BRAND + "/" + android.os.Build.PRODUCT + "/"
-	            + android.os.Build.DEVICE;
-	    Logger.dbg(CameraUtils.class, "hasImageCaptureBug", "*** checking camera bug for device: " + myDevice);
-		return devices.contains(myDevice);
+	            + android.os.Build.DEVICE; // + "/" + android.os.Build.VERSION.SDK_INT;
+	    boolean hasBug = devices.contains(myDevice);
+	    Logger.dbg(CameraUtils.class, "hasImageCaptureBug", "*** checking camera bug for device: " + myDevice + "=" + hasBug);
+		return hasBug;
 	}
 	
 	public static Uri getImagePath(String path) {

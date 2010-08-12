@@ -5,6 +5,7 @@ import java.util.Currency;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,12 +42,13 @@ public class EditProduct implements ESTab {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
 		this.productSaver=new ProductSaver(cartProduct, activity);
+		this.imageCleaner = new ProductImageCleaner();
+
 		Logger.d(this, "EditProduct", "CartProduct: " + cartProduct);
 	}
 
 	public void refreshProductImage() {
-		getImageCleaner().clean();
-		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
+		getImageCleaner().refresh();
 	}
 
 	public void updateValuesOnExit() {
@@ -86,7 +88,7 @@ public class EditProduct implements ESTab {
 		};
 		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, cartProduct, currencyRetriever , activity);
 		editPrice.addTextChangedListener(setKilosForProductListener );
-		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever);
+		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever, imageCleaner);
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
 		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, currencyRetriever, productSaver, activity));
 		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, productSaver, activity));
@@ -104,9 +106,8 @@ public class EditProduct implements ESTab {
 		// TODO check sul prezzo anzichè sul market
 		addToCart.setEnabled(cartProduct.getShopping().getMarket() != null);
 		productName.setText(cartProduct.getProduct().getName());
-		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
-		this.imageCleaner = new ProductImageCleaner();
-		productPictureView.setOnClickListener(new GrabImageLauncher(cartProduct.getProduct().getBarcode(), imageCleaner, activity));
+//		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
+		productPictureView.setOnClickListener(new GrabImageLauncher(cartProduct, imageCleaner, activity));
 		productPriceTypeChangedListener.onCheckedChanged(null, 0);
 		setKilosForProductListener.onTextChanged(null, 0, 0, 0);
 		editPrice.setText(currentPrice != null ? currentPrice.getAmount().getReadableAmount(1) : "");
@@ -129,6 +130,13 @@ public class EditProduct implements ESTab {
 			} catch (Exception e) {
 
 			}
+		}
+
+		public void refresh() {
+			Drawable drawableForProductDetails = cartProduct.getProduct().getImage().getDrawableForProductDetails(activity);
+			if(productPictureView.getDrawable().equals(drawableForProductDetails)) return;
+			clean();
+			productPictureView.setImageDrawable(drawableForProductDetails);
 		}
 	}
 

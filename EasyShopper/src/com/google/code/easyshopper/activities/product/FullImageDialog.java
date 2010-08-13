@@ -30,15 +30,15 @@ public class FullImageDialog extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.full_image_dialog);
-	}
-	@Override
-	protected void onStart() {
-		super.onStart();
 		setTitle(cartProduct.getProduct().getName());
 		Bitmap productBitmap = cartProduct.getProduct().getImage().getFullBitmap();
 		
 		imageView = (ImageView) findViewById(R.id.FullImageView);
 		imageView.setImageBitmap(productBitmap);
+	}
+	@Override
+	protected void onStart() {
+		super.onStart();
 		((Button) findViewById(R.id.CloseImageDialogButton)).setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				FullImageDialog.this.dismiss();

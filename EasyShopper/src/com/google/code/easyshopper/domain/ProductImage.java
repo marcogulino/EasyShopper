@@ -21,6 +21,11 @@ public class ProductImage {
 		bmpFactory.inSampleSize=4;
 		return getBitmap(bmpFactory);
 	}
+	
+	public Bitmap getFullBitmap() {
+		BitmapFactory.Options bmpFactory = new BitmapFactory.Options();
+		return getBitmap(bmpFactory);
+	}
 
 	private Bitmap getBitmap(BitmapFactory.Options bmpFactory) {
 		Uri imagePath = imagePath();

@@ -101,7 +101,7 @@ public class EditProduct implements ESTab {
 		addToCart.setEnabled(cartProduct.getShopping().getMarket() != null);
 		productName.setText(cartProduct.getProduct().getName());
 //		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
-		productPictureView.setOnClickListener(new GrabImageLauncher(cartProduct, imageCleaner, activity));
+		productPictureView.setOnClickListener(new PopupImageListener(cartProduct, activity, new GrabImageLauncher(imageCleaner)));
 		productPriceTypeChangedListener.onCheckedChanged(null, 0);
 		setKilosForProductListener.onTextChanged(null, 0, 0, 0);
 		editPrice.setText(currentPrice != null ? currentPrice.getAmount().getReadableAmount(1) : "");

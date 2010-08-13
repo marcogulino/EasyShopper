@@ -6,26 +6,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.view.View;
-import android.view.View.OnClickListener;
 
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.utility.CameraUtils;
 
-public class GrabImageLauncher implements OnClickListener {
+public class GrabImageLauncher {
 	private final ImageManager cleaner;
-	private final Activity activity;
-	private final CartProduct cartProduct;
 
-	public GrabImageLauncher(CartProduct cartProduct, ImageManager cleaner,
-			Activity activity) {
-		this.cartProduct = cartProduct;
+	public GrabImageLauncher(ImageManager cleaner) {
 		this.cleaner = cleaner;
-		this.activity = activity;
 	}
 
-	public void onClick(View v) {
+	public void launchFor(CartProduct cartProduct, Activity activity) {
 		cleaner.clean();
 		File file = new File(CameraUtils.SAVED_PATH + "/.nomedia");
 		boolean mkdirs = file.mkdir() || file.mkdirs();

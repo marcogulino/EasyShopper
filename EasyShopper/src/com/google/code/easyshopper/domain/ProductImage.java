@@ -17,13 +17,17 @@ public class ProductImage {
 	}
 
 	public Bitmap getSmallBitmap() {
+		BitmapFactory.Options bmpFactory = new BitmapFactory.Options();
+		bmpFactory.inSampleSize=4;
+		return getBitmap(bmpFactory);
+	}
+
+	private Bitmap getBitmap(BitmapFactory.Options bmpFactory) {
 		Uri imagePath = imagePath();
 		boolean hasImage = hasImage(imagePath);
 		if(! hasImage) return null;
 		
 		
-		BitmapFactory.Options bmpFactory = new BitmapFactory.Options();
-		bmpFactory.inSampleSize=4;
 		Bitmap bitmap = BitmapFactory.decodeFile(imagePath.getPath(), bmpFactory);
 		return bitmap;
 	}

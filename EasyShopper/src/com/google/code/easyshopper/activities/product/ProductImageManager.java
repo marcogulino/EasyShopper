@@ -10,14 +10,14 @@ import com.google.code.easyshopper.domain.CartProduct;
 public class ProductImageManager implements ImageManager {
 	private final CartProduct cartProduct;
 	private final Activity activity;
-	private final int productsmallpicture;
+	private final int productPictureView;
 	private final int noProductImageId;
 	boolean hasDrawnImage=false;
 
-	public ProductImageManager(CartProduct cartProduct, Activity activity, int productsmallpicture, int noProductImageId) {
+	public ProductImageManager(CartProduct cartProduct, Activity activity, int productPictureView, int noProductImageId) {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
-		this.productsmallpicture = productsmallpicture;
+		this.productPictureView = productPictureView;
 		this.noProductImageId = noProductImageId;
 	}
 
@@ -36,7 +36,7 @@ public class ProductImageManager implements ImageManager {
 
 
 	private ImageView imageView() {
-		return (ImageView) activity.findViewById(productsmallpicture);
+		return (ImageView) activity.findViewById(productPictureView);
 	}
 
 	public void refresh() {

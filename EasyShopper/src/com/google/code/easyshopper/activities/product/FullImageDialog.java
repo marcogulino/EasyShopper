@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.domain.CartProduct;

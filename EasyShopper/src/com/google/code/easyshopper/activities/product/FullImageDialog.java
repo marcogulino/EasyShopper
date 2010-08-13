@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.code.easyshopper.R;
@@ -14,10 +16,14 @@ public class FullImageDialog extends Dialog {
 
 	private final CartProduct cartProduct;
 	private ImageView imageView;
+	private final GrabImageLauncher grabImageLauncher;
+	private final Activity activity;
 
-	public FullImageDialog(CartProduct cartProduct, Activity activity) {
+	public FullImageDialog(CartProduct cartProduct, Activity activity, GrabImageLauncher grabImageLauncher) {
 		super(activity);
 		this.cartProduct = cartProduct;
+		this.activity = activity;
+		this.grabImageLauncher = grabImageLauncher;
 	}
 
 	@Override
@@ -33,6 +39,18 @@ public class FullImageDialog extends Dialog {
 		
 		imageView = (ImageView) findViewById(R.id.FullImageView);
 		imageView.setImageBitmap(productBitmap);
+		((Button) findViewById(R.id.CloseImageDialogButton)).setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				FullImageDialog.this.dismiss();
+			}
+		});
+		((Button) findViewById(R.id.TakeNewPictureButton)).setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				grabImageLauncher.launchFor(cartProduct, activity);
+				FullImageDialog.this.dismiss();
+			}
+			
+		});
 	}
 	
 	@Override

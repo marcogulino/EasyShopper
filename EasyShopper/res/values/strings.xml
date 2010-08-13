@@ -49,4 +49,6 @@
 <string name="PriceForUnit">Price for unit</string>
 <string name="PriceForKilos">Price for kilogram</string>
 <string name="N_A">N/A</string>
+<string name="Take_New_Picture">Take new picture</string>
+<string name="Close">Close</string>
 </resources>

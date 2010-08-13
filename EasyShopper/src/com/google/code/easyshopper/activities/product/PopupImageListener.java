@@ -29,7 +29,7 @@ public class PopupImageListener implements OnClickListener {
 		}
 		EditText editProductName = (EditText) activity.findViewById(productnameEdit);
 		cartProduct.getProduct().setName(StringUtils.editTextToString(editProductName));
-		new FullImageDialog(cartProduct, activity).show();
+		new FullImageDialog(cartProduct, activity, grabImageLauncher).show();
 	}
 
 }

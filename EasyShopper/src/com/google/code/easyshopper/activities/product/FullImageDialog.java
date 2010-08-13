@@ -28,6 +28,7 @@ public class FullImageDialog extends Dialog {
 	@Override
 	protected void onStart() {
 		super.onStart();
+		setTitle(cartProduct.getProduct().getName());
 		Bitmap productBitmap = cartProduct.getProduct().getImage().getFullBitmap();
 		
 		imageView = (ImageView) findViewById(R.id.FullImageView);

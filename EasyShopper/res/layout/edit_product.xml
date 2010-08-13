@@ -7,9 +7,9 @@
 		android:gravity="center_vertical">
 		<ImageView android:clickable="false" android:id="@+id/ProductSmallPicture"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:src="@android:drawable/ic_menu_gallery"
 			android:maxWidth="100dp"
-			android:maxHeight="100dp" android:adjustViewBounds="true"
-			android:src="@android:drawable/ic_menu_gallery" />
+			android:maxHeight="100dp" android:adjustViewBounds="true" />
 		<LinearLayout android:layout_width="fill_parent"
 			android:layout_height="fill_parent" android:orientation="vertical"
 			android:gravity="center_vertical">
@@ -18,7 +18,8 @@
 			<TextView android:id="@+id/ProductBarcode" android:text="{barcode}"
 				android:layout_width="fill_parent" android:layout_height="wrap_content" />
 		</LinearLayout>
-	</LinearLayout>
+	
+</LinearLayout>
 	<EditText android:hint="@string/ProductName" android:id="@+id/ProductName"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 	<LinearLayout android:layout_width="fill_parent"

@@ -96,7 +96,7 @@ public class EditProductActivity extends TabActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Logger.d(this, "onActivityResult", ": {" + "requestCode=" + requestCode + ", resultCode=" + resultCode
 				+ ", intent: " + data + "}");
-		editProduct.refreshProductImage();
+		editProduct.getImageCleaner().refresh();
 	}
 
 }

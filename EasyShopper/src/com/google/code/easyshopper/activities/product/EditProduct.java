@@ -3,9 +3,6 @@ package com.google.code.easyshopper.activities.product;
 import java.util.Currency;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,7 +29,7 @@ public class EditProduct implements ESTab {
 	private Spinner currencySpinner;
 	private ArrayAdapter<CurrencyItem> currencySpinnerAdapter;
 	private EditText editPrice;
-	private ProductImageCleaner imageCleaner;
+	private ProductImageManager imageCleaner;
 	private ProductSaver productSaver;
 	static final String TAG = "edit_product";
 	private static final String[] currencies = new String[] { "EUR", "USD" };
@@ -42,14 +39,11 @@ public class EditProduct implements ESTab {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
 		this.productSaver=new ProductSaver(cartProduct, activity);
-		this.imageCleaner = new ProductImageCleaner();
+		this.imageCleaner = new ProductImageManager(cartProduct, activity, R.id.ProductSmallPicture, android.R.drawable.ic_menu_gallery);
 
 		Logger.d(this, "EditProduct", "CartProduct: " + cartProduct);
 	}
 
-	public void refreshProductImage() {
-		getImageCleaner().refresh();
-	}
 
 	public void updateValuesOnExit() {
 		if (updateOnExit != null)
@@ -114,31 +108,10 @@ public class EditProduct implements ESTab {
 
 	}
 
-	public ImageCleaner getImageCleaner() {
+	public ImageManager getImageCleaner() {
 		return imageCleaner;
 	}
 
-	private final class ProductImageCleaner implements ImageCleaner {
-		public void clean() {
-			if (!cartProduct.getProduct().getImage().hasImage(activity))
-				return;
-			try {
-				BitmapDrawable drawable = (BitmapDrawable) productPictureView.getDrawable();
-				Bitmap bitmap = drawable.getBitmap();
-				productPictureView.setImageBitmap(null);
-				bitmap.recycle();
-			} catch (Exception e) {
-
-			}
-		}
-
-		public void refresh() {
-			Drawable drawableForProductDetails = cartProduct.getProduct().getImage().getDrawableForProductDetails(activity);
-			if(productPictureView.getDrawable().equals(drawableForProductDetails)) return;
-			clean();
-			productPictureView.setImageDrawable(drawableForProductDetails);
-		}
-	}
 
 	public class CurrencyItem {
 		public final Currency currency;

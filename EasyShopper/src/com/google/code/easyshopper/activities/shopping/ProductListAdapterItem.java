@@ -85,8 +85,8 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 		String totalPrice = quantity>1 ? priceLabel(quantity): "";
 		((TextView) mainView.findViewById(R.id.ProductPriceQuantity)).setText(pricePerQuantity);
 		((TextView) mainView.findViewById(R.id.ProductPrice)).setText(totalPrice);
-		if(cartProduct.getProduct().getImage().hasImage(activity)) {
-			((ImageView) mainView.findViewById(R.id.ListViewProductImage)).setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
+		if(cartProduct.getProduct().getImage().hasImage()) {
+			((ImageView) mainView.findViewById(R.id.ListViewProductImage)).setImageBitmap(cartProduct.getProduct().getImage().getSmallBitmap());
 		}
 
 		return mainView;

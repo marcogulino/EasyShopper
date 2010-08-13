@@ -14,11 +14,11 @@ import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.utility.CameraUtils;
 
 public class GrabImageLauncher implements OnClickListener {
-	private final ImageCleaner cleaner;
+	private final ImageManager cleaner;
 	private final Activity activity;
 	private final CartProduct cartProduct;
 
-	public GrabImageLauncher(CartProduct cartProduct, ImageCleaner cleaner,
+	public GrabImageLauncher(CartProduct cartProduct, ImageManager cleaner,
 			Activity activity) {
 		this.cartProduct = cartProduct;
 		this.cleaner = cleaner;

@@ -18,9 +18,9 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 	private final CurrencyRetriever currencyRetriever;
 	private final Activity activity;
 	private final CartProduct cartProduct;
-	private final ImageCleaner cleaner;
+	private final ImageManager cleaner;
 
-	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, ImageCleaner cleaner) {
+	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, ImageManager cleaner) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.activity = activity;
 		this.cartProduct = cartProduct;

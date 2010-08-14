@@ -8,6 +8,7 @@ import com.google.code.easyshopper.db.MarketDBAdapter;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
+import com.google.code.easyshopper.db.ProductTagsDBAdapter;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
 
 public class EasyShopperSqliteOpenHelper extends SQLiteOpenHelper {
@@ -20,7 +21,8 @@ public class EasyShopperSqliteOpenHelper extends SQLiteOpenHelper {
 		Prices("prices"),
 		Markets("markets"),
 		Shoppings("shoppings"),
-		ProductsShoppings("products_shoppings");
+		ProductsShoppings("products_shoppings"),
+		ProductTags("product_tags");
 		
 		private String tablename;
 		private Tables(String tablename) {
@@ -48,6 +50,7 @@ public class EasyShopperSqliteOpenHelper extends SQLiteOpenHelper {
 		new ShoppingDBAdapter(db).create();
 		new PriceDBAdapter(db).create();
 		new ProductShoppingDBAdapter(db).create();
+		new ProductTagsDBAdapter(db).create();
 	}
 
 

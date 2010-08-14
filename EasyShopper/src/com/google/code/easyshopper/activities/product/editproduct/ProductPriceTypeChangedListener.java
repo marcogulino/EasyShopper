@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.product;
+package com.google.code.easyshopper.activities.product.editproduct;
 
 import android.app.Activity;
 import android.view.View;
@@ -18,14 +18,14 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 	private final CurrencyRetriever currencyRetriever;
 	private final Activity activity;
 	private final CartProduct cartProduct;
-	private final ImageManager cleaner;
+	private final Refresher refresher;
 
-	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, ImageManager cleaner) {
+	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, Refresher refresher) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.activity = activity;
 		this.cartProduct = cartProduct;
 		this.currencyRetriever = currencyRetriever;
-		this.cleaner = cleaner;
+		this.refresher = refresher;
 	}
 
 	public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -45,7 +45,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 			String priceAsLabel = price.getReadableAmount(1);
 			productPriceLabel.setText(priceAsLabel);
 		}
-		cleaner.refresh();
+		refresher.refresh();
 	}
 
 }

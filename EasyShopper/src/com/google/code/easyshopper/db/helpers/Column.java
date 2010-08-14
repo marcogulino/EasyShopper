@@ -1,8 +1,6 @@
 package com.google.code.easyshopper.db.helpers;
 
 
-
-
 public class Column implements QueryColumn {
 
 	private final String columnName;

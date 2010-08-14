@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.google.code.easyshopper.db.domaincreators.MarketCreator;
 import com.google.code.easyshopper.db.helpers.Column;
 import com.google.code.easyshopper.db.helpers.Column.ColumnType;
+import com.google.code.easyshopper.db.helpers.Constraint;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.LookUpObject;
@@ -101,6 +102,12 @@ public class MarketDBAdapter extends AbstractDBAdapter {
 	@Override
 	protected Tables table() {
 		return Tables.Markets;
+	}
+	
+
+	@Override
+	protected List<Constraint> sqlConstraints() {
+		return new ArrayList<Constraint>();
 	}
 
 }

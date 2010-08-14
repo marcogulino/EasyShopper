@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.product;
+package com.google.code.easyshopper.activities.product.editproduct;
 
 import java.util.Currency;
 
@@ -31,13 +31,15 @@ public class EditProduct implements ESTab {
 	private EditText editPrice;
 	private ProductImageManager imageCleaner;
 	private ProductSaver productSaver;
-	static final String TAG = "edit_product";
+	public static final String TAG = "edit_product";
 	private static final String[] currencies = new String[] { "EUR", "USD" };
 	private EditText productName;
+	private final Refresher otherTabsRefresher;
 
-	public EditProduct(CartProduct cartProduct, Activity activity) {
+	public EditProduct(CartProduct cartProduct, Activity activity, Refresher otherTabsRefresher) {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
+		this.otherTabsRefresher = otherTabsRefresher;
 		this.productSaver=new ProductSaver(cartProduct, activity);
 		this.imageCleaner = new ProductImageManager(cartProduct, activity, R.id.ProductSmallPicture, android.R.drawable.ic_menu_gallery);
 
@@ -77,12 +79,20 @@ public class EditProduct implements ESTab {
 		CurrencyRetriever currencyRetriever = new CurrencyRetriever() {
 			
 			public Currency currency() {
+				Logger.d(this, "currency", "currency list: " + currencySpinnerAdapter.getCount());
 				return currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency;
 			}
 		};
 		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, cartProduct, currencyRetriever , activity);
 		editPrice.addTextChangedListener(setKilosForProductListener );
-		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever, imageCleaner);
+		Refresher refresher = new Refresher() {
+			
+			public void refresh() {
+				imageCleaner.refresh();
+				otherTabsRefresher.refresh();
+			}
+		};
+		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever, refresher );
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
 		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, currencyRetriever, productSaver, activity));
 		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, productSaver, activity));

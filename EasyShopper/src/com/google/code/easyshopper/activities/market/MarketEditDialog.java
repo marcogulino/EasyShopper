@@ -16,6 +16,7 @@ import com.google.code.easyshopper.activities.market.MarketActivity.ActivateItem
 import com.google.code.easyshopper.db.MarketDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.Market;
+import com.google.code.easyshopper.utility.StringUtils;
 
 public final class MarketEditDialog extends EditableTextDialog {
 	private final Context context;
@@ -51,7 +52,7 @@ public final class MarketEditDialog extends EditableTextDialog {
 
 	private final class OkButtonOnClickListener implements View.OnClickListener {
 		public void onClick(View v) {
-			String marketName = getEditText().trim();
+			String marketName = StringUtils.editTextToString(getEditText());
 			Logger.d(this, "onClick", "got result: "+ marketName);
 			market = new Market(MarketDBAdapter.SAVE_NEW);
 			market.setName(marketName);

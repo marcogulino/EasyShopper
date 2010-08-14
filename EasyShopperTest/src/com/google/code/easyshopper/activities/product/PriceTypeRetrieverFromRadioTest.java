@@ -4,6 +4,7 @@ import android.test.AndroidTestCase;
 
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.IRadioGroup;
+import com.google.code.easyshopper.activities.product.editproduct.PriceTypeRetrieverFromRadio;
 
 public class PriceTypeRetrieverFromRadioTest extends AndroidTestCase {
 

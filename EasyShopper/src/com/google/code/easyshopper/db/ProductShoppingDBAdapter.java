@@ -15,6 +15,7 @@ import com.google.code.easyshopper.ES;
 import com.google.code.easyshopper.db.domaincreators.ProductCreator;
 import com.google.code.easyshopper.db.helpers.Column;
 import com.google.code.easyshopper.db.helpers.Column.ColumnType;
+import com.google.code.easyshopper.db.helpers.Constraint;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.Join;
 import com.google.code.easyshopper.db.helpers.MyCursor;
@@ -146,5 +147,11 @@ public class ProductShoppingDBAdapter extends AbstractDBAdapter {
 	@Override
 	protected Tables table() {
 		return Tables.ProductsShoppings;
+	}
+	
+
+	@Override
+	protected List<Constraint> sqlConstraints() {
+		return new ArrayList<Constraint>();
 	}
 }

@@ -1,5 +1,6 @@
 package com.google.code.easyshopper.db;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,7 @@ import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.db.domaincreators.ProductCreator;
 import com.google.code.easyshopper.db.helpers.Column;
 import com.google.code.easyshopper.db.helpers.Column.ColumnType;
+import com.google.code.easyshopper.db.helpers.Constraint;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
 import com.google.code.easyshopper.db.helpers.LookUpObject;
 import com.google.code.easyshopper.domain.CartProduct;
@@ -87,5 +89,11 @@ public class ProductDBAdapter extends AbstractDBAdapter {
 	@Override
 	protected Tables table() {
 		return Tables.Products;
+	}
+	
+
+	@Override
+	protected List<Constraint> sqlConstraints() {
+		return new ArrayList<Constraint>();
 	}
 }

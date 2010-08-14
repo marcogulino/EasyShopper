@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.product;
+package com.google.code.easyshopper.activities.product.editproduct;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import com.google.code.easyshopper.activities.product.EditProductActivity;
 import com.google.code.easyshopper.utility.StringUtils;
 
 public class SaveProductListener implements OnClickListener {

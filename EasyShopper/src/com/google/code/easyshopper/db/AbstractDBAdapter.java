@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.db.helpers.Column;
+import com.google.code.easyshopper.db.helpers.Constraint;
+import com.google.code.easyshopper.db.helpers.ConstraintExtractor;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper.Tables;
+import com.google.code.easyshopper.utility.CollectionUtils;
 import com.google.code.easyshopper.utility.StringUtils;
 
 
@@ -35,12 +38,15 @@ public abstract class AbstractDBAdapter {
 			declarations.add(column.createSQL());
 			foreignKeys.add(column.foreignKeyReferenceString());
 		}
+		declarations.addAll(CollectionUtils.sublist(sqlConstraints(), new ConstraintExtractor()));
 		declarations.addAll(foreignKeys);
 		query+= StringUtils.join(declarations, ", ");
 		query+=");";
 		Logger.d(this, "create", "*** creating table:" + query);
 		database.execSQL(query);
 	}
+
+	protected abstract List<Constraint> sqlConstraints();
 
 	protected SQLiteDatabase readableDatabase() {
 		if(database!=null) {

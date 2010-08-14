@@ -16,13 +16,12 @@ public abstract class EditableTextDialog extends Dialog {
 		this.title = title;
 	}
 
-	protected String getEditText() {
-		return ((EditText) findViewById(R.id.Editable_Text_Dialog_Text)).getText().toString();
+	protected EditText getEditText() {
+		return ((EditText) findViewById(R.id.Editable_Text_Dialog_Text));
 	}
 
 	protected void onCreate(Bundle savedInstanceState, View.OnClickListener okButtonListener) {
 		onCreate(savedInstanceState, okButtonListener, new View.OnClickListener() {
-
 			public void onClick(View paramView) {
 				cancel();
 			}

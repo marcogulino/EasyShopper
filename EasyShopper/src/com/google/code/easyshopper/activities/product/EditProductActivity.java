@@ -15,6 +15,9 @@ import android.widget.TabHost.TabContentFactory;
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.ESTab;
+import com.google.code.easyshopper.activities.product.editproduct.EditProduct;
+import com.google.code.easyshopper.activities.product.editproduct.Refresher;
+import com.google.code.easyshopper.activities.product.edittags.EditProductTags;
 import com.google.code.easyshopper.db.PriceDBAdapter;
 import com.google.code.easyshopper.db.ProductDBAdapter;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
@@ -33,6 +36,8 @@ public class EditProductActivity extends TabActivity {
 	private Product product;
 	private EditProduct editProduct;
 	private Map<String, ESTab> tabs;
+	private EditProductTags editProductTags;
+	private CartProduct cartProduct;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +71,37 @@ public class EditProductActivity extends TabActivity {
 				PARAM_SHOPPING));
 		product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
 		if(product==null) product= new Product(barcode);
+		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(product.getBarcode(), shopping.getMarket());
+		cartProduct = new CartProduct(barcode, product, shopping, 0, currentPrice);
+
 		Logger.d(this, "onCreate", "product: " + product);
 
 		createEditProductTab(tabhost, tabContentFactory, barcode, shopping);
+		createEditProductTagsTab(tabhost, tabContentFactory, barcode, shopping);
 
 		tabhost.setCurrentTab(0);
 	}
 
+	private void createEditProductTagsTab(TabHost tabhost, TabContentFactory tabContentFactory, String barcode, Shopping shopping) {
+		
+		editProductTags = new EditProductTags(this, cartProduct);
+		tabs.put(EditProductTags.TAG, editProductTags );
+		TabHost.TabSpec product_tags_spec = tabhost.newTabSpec(EditProductTags.TAG);
+		product_tags_spec.setContent(tabContentFactory);
+		product_tags_spec.setIndicator("Tags");
+		tabhost.addTab(product_tags_spec);
+	}
+
 	private void createEditProductTab(TabHost tabhost, TabContentFactory tabContentFactory, final String barcode,
 			Shopping shopping) {
-		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
-		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(product.getBarcode(), shopping.getMarket());
-
-		editProduct = new EditProduct(new CartProduct(barcode, product, shopping, 0, currentPrice), this);
+		Refresher otherTabsRefresher = new Refresher() {
+			public void refresh() {
+				Logger.d(this, "refresh", "Refreshing " + editProductTags);
+				if(editProductTags != null)
+					editProductTags.refresh();
+			}
+		};
+		editProduct = new EditProduct(cartProduct, this, otherTabsRefresher);
 		tabs.put(EditProduct.TAG, editProduct);
 		TabHost.TabSpec product_spec = tabhost.newTabSpec(EditProduct.TAG);
 		product_spec.setContent(tabContentFactory);

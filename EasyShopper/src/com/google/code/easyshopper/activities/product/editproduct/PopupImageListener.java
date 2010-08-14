@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.product;
+package com.google.code.easyshopper.activities.product.editproduct;
 
 import android.app.Activity;
 import android.view.View;

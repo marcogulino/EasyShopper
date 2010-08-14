@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.product;
+package com.google.code.easyshopper.activities.product.editproduct;
 
 import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.activities.IRadioGroup;
@@ -6,7 +6,7 @@ import com.google.code.easyshopper.activities.IRadioGroup;
 public class PriceTypeRetrieverFromRadio implements PriceTypeRetriever {
 	private final IRadioGroup productPriceType;
 
-	PriceTypeRetrieverFromRadio(IRadioGroup productPriceType) {
+	public PriceTypeRetrieverFromRadio(IRadioGroup productPriceType) {
 		this.productPriceType = productPriceType;
 	}
 

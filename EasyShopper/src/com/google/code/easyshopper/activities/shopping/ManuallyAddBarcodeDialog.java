@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.google.code.easyshopper.EditableTextDialog;
 import com.google.code.easyshopper.domain.Shopping;
+import com.google.code.easyshopper.utility.StringUtils;
 
 final class ManuallyAddBarcodeDialog extends EditableTextDialog {
 	private final Activity activity;
@@ -22,7 +23,7 @@ final class ManuallyAddBarcodeDialog extends EditableTextDialog {
 		android.view.View.OnClickListener okButtonListener = new View.OnClickListener() {
 			
 			public void onClick(View paramView) {
-				new LaunchProductActivity(activity, shopping).startProductActivity(getEditText());
+				new LaunchProductActivity(activity, shopping).startProductActivity(StringUtils.editTextToString(getEditText()));
 				dismiss();
 			}
 		};

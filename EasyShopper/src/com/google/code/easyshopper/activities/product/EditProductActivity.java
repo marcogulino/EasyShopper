@@ -33,7 +33,6 @@ public class EditProductActivity extends TabActivity {
 	public static final int PRODUCT_SAVED = 100;
 	public static final String PRODUCT_SAVED_ACTION = "PRODUCT_SAVED";
 	public static final String PARAM_SHOPPING = "_shopping_id_";
-	private Product product;
 	private EditProduct editProduct;
 	private Map<String, ESTab> tabs;
 	private EditProductTags editProductTags;
@@ -69,7 +68,7 @@ public class EditProductActivity extends TabActivity {
 		SQLiteOpenHelper sqLiteOpenHelper = new EasyShopperSqliteOpenHelper(this);
 		Shopping shopping = new ShoppingDBAdapter(sqLiteOpenHelper).lookUp(getIntent().getExtras().getLong(
 				PARAM_SHOPPING));
-		product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
+		Product product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
 		if(product==null) product= new Product(barcode);
 		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(product.getBarcode(), shopping.getMarket());
 		cartProduct = new CartProduct(barcode, product, shopping, 0, currentPrice);

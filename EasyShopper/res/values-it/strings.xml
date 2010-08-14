@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<string name="NewShoppingMenuItem">Nuova Spesa</string>
+<string name="ScanNewProductLabel">Aggiungi Prodotto...</string>
+<string name="ProductBarcodeLabel">Codice a barre:</string>
+<string name="AddToCartButton">Aggiungi al Carrello</string>
+<string name="ProductName">Descrizione del Prodotto</string>
+<string name="ShoppingDateLabel">Data: </string>
+<string name="EditProduct_PriceForMarket">Prezzo per il negozio: </string>
+<string name="PickMarket">Scegli Negozio</string>
+<string name="Market_SelectOnMapFirst">Prima clicca sulla mappa la posizione da aggiungere</string>
+
+<string name="SuggestBestMarket">Suggerisci</string>
+<string name="Market_MyPosition">La mia posizione</string><string name="Market_AddFromMyLocation">Aggiungi qui</string>
+<string name="Market_AddFromMap">Aggiungi da mappa</string>
+<string name="Market_HintToAddCustomPosition">Usa il tasto &quot;Menu&quot;, quindi &quot;Aggiungi da mappa&quot; per aggiungere un negozio in questa posizione</string>
+<string name="Market_HintToAddMyPosition">Usa il tasto &quot;Menu&quot;, quindi &quot;Aggiungi da mia posizione&quot; per aggiungere un negozio dalla posizione corrente</string>
+<string name="Market_promptForMarkets">Scegli il negozio da usare...</string>
+<string name="Market_Dialog_getName">Scrivi il nome del negozio</string>
+
+
+<string name="WaitForPosition">In attesa della posizione...</string>
+
+
+<string name="Shopping_RemoveProductFromCart">Togli dal Carrello</string>
+<string name="Shopping_DecreaseProductQuantity">Riduci quantità</string>
+<string name="Shopping_RemoveProductForAllQuantities">Togli tutto</string>
+<string name="delete">Cancella</string>
+<string name="ProductLabel">Prodotto: </string>
+<string name="unset">non impostato</string>
+
+<string name="ScanBarcode">Scansione codice a barre</string>
+<string name="ManuallyAddBarcode">Scrivi codice a barre</string>
+<string name="TotalPrice">Prezzo Totale</string>
+<string name="PickOne">Scegli...</string>
+<string name="Meters">metri</string>
+
+<string name="Done">Finito</string>
+<string name="TotalItemsLabel">Numero prodotti nel carrello</string>
+<string name="ProductActivity_HowMany">Aggiunto a %{shoppingList}.\nHai %{howmany} di questi prodotti sulla lista della spesa</string>
+<string name="Price_Type_Unit">Prezzo per quantità</string>
+<string name="Price_Type_Weight">Prezzo per peso</string>
+<string name="MarketLabel">Negozio:</string>
+
+<string name="Price">Prezzo: </string>
+<string name="Kilos">Chilogrammi: </string>
+<string name="PriceForUnit">Prezzo unitario</string>
+<string name="PriceForKilos">Prezzo per chilogrammo</string>
+
+<string name="N_A">Non disponibile</string>
+<string name="Take_New_Picture">Scatta foto</string>
+<string name="Close">Chiudi</string>
+<string name="Add_New_Tag">Add new tag...</string>
+</resources>

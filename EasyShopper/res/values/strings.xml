@@ -11,28 +11,29 @@
 <string name="ShoppingDateLabel">Date: </string>
 <string name="EditProduct_PriceForMarket">Price for market: </string>
 <string name="PickMarket">Select Market</string>
+<string name="Market_SelectOnMapFirst">Please click on map the position you want to add first</string>
 
 <string name="SuggestBestMarket">Suggest</string>
-<string name="Market_AddFromMyLocation">Add from my location</string>
+<string name="Market_MyPosition">My Position</string><string name="Market_AddFromMyLocation">Add from my location</string>
 <string name="Market_AddFromMap">Add from map</string>
 <string name="Market_HintToAddCustomPosition">Use "Menu" key, then "Add from map" to add a shop in this position</string>
 <string name="Market_HintToAddMyPosition">Use "Menu" key, then "Add from my location" to add a shop in current position</string>
 <string name="Market_promptForMarkets">Choose the market to use...</string>
 <string name="Market_Dialog_getName">Enter Market Name</string>
 
-<string name="Market_MyPosition">My Position</string>
+
 <string name="WaitForPosition">Waiting for position...</string>
-<string name="Market_SelectOnMapFirst">Please click on map the position you want to add first</string>
-<string name="Shopping_SetProductPrice">Set Price</string>
+
+
 <string name="Shopping_RemoveProductFromCart">Remove from Cart</string>
 <string name="Shopping_DecreaseProductQuantity">Remove one from Cart</string>
 <string name="Shopping_RemoveProductForAllQuantities">Remove all</string>
 <string name="delete">Delete</string>
 <string name="ProductLabel">Product: </string>
 <string name="unset">not set</string>
-<string name="PleaseChooseMarketFirst">Please choose market for this shopping first.</string>
-<string name="ScanBarcode">Scan barcode using BarcodeScanner</string>
-<string name="ManuallyAddBarcode">Manually Add Barcode</string>
+
+<string name="ScanBarcode">Scan Barcode</string>
+<string name="ManuallyAddBarcode">Write Barcode</string>
 <string name="TotalPrice">Total Price</string>
 <string name="PickOne">Pick one...</string>
 <string name="Meters">meters</string>
@@ -44,12 +45,12 @@
 <string name="Price_Type_Weight">Price by weight</string>
 <string name="MarketLabel">Market:</string>
 
-<string name="Price">Price:</string>
-<string name="Kilos">Kilos:</string>
+<string name="Price">Price: </string>
+<string name="Kilos">Kilos: </string>
 <string name="PriceForUnit">Price for unit</string>
 <string name="PriceForKilos">Price for kilogram</string>
-<string name="N_A">N/A</string>
-<string name="Take_New_Picture">Take new picture</string>
-<string name="Close">Close</string>
-<string name="Add_New_Tag">Add new tag...</string>
+<string name="N_A">Not available</string>
+<string name="Take_New_Picture">Scatta foto</string>
+<string name="Close">Chiudi</string>
+<string name="Add_New_Tag">Aggiungi un tag...</string>
 </resources>

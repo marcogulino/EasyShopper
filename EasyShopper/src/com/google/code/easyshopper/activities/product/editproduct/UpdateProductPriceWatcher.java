@@ -1,9 +1,9 @@
 package com.google.code.easyshopper.activities.product.editproduct;
 
-import com.google.code.easyshopper.domain.CartProduct;
-
 import android.text.Editable;
 import android.text.TextWatcher;
+
+import com.google.code.easyshopper.domain.CartProduct;
 
 public class UpdateProductPriceWatcher implements TextWatcher {
 

@@ -2,9 +2,7 @@ package com.google.code.easyshopper.activities.shopping;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
-import com.google.code.easyshopper.R;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.helpers.EasyShopperSqliteOpenHelper;
 import com.google.code.easyshopper.domain.CartProduct;
@@ -44,20 +42,6 @@ public class ActionsOnProduct {
 					productShoppingDBAdapter.decreaseQuantity(cartProduct);
 					populator.run();
 				}
-			}
-		};
-	}
-
-	public Action setPriceAction(final Context context) {
-		return new Action() {
-			
-			public void run(Runnable populator) {
-				if(cartProduct.getShopping().getMarket()==null) {
-					Toast.makeText(context, R.string.PleaseChooseMarketFirst, Toast.LENGTH_SHORT).show();
-					return;
-				}
-				// TODO rimuovere?
-//				new SetPriceDialog(context, cartProduct, populator).show();
 			}
 		};
 	}

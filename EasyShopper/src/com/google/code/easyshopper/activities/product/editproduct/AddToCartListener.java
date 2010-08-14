@@ -32,7 +32,7 @@ public class AddToCartListener implements OnClickListener {
 		int howMany = productShoppingDBAdapter.countProductForShopping(cartProduct.getShopping(), cartProduct.getProduct());
 		String text = activity.getResources().getString(R.string.ProductActivity_HowMany).replaceAll("%\\{howmany\\}", String.valueOf(howMany))
 				.replace("%{shoppingList}", cartProduct.getShopping().formattedDate(activity));
-		Toast.makeText(activity, text, Toast.LENGTH_SHORT).show();
+		Toast.makeText(activity, text, Toast.LENGTH_LONG).show();
 	}
 
 }

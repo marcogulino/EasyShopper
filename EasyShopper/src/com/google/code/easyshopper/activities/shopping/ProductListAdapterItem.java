@@ -20,7 +20,6 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 
 	private final Activity activity;
 	private final CartProduct cartProduct;
-	private String setPrice;
 	private String removeFromCart;
 	private String removeAllQuantitiesFromCart;
 	private String decreaseByOne;
@@ -31,7 +30,6 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 		this.cartProduct = cartProduct;
 		this.activity = activity;
 		this.populateList = populateList;
-		setPrice = activity.getResources().getString(R.string.Shopping_SetProductPrice);
 		removeFromCart = activity.getResources().getString(R.string.Shopping_RemoveProductFromCart);
 		removeAllQuantitiesFromCart = activity.getResources()
 				.getString(R.string.Shopping_RemoveProductForAllQuantities);
@@ -53,9 +51,9 @@ public class ProductListAdapterItem extends ProductModelListAdapterItem {
 	@Override
 	public boolean executeOnLongClick() {
 		AlertDialog.Builder builder = new Builder(activity);
-		String[] longClickActions = new String[] { setPrice, removeFromCart };
+		String[] longClickActions = new String[] { removeFromCart };
 		if (cartProduct.getQuantity() > 1) {
-			longClickActions = new String[] { setPrice, decreaseByOne, removeAllQuantitiesFromCart };
+			longClickActions = new String[] { decreaseByOne, removeAllQuantitiesFromCart };
 		}
 		longClickDialog(builder, longClickActions);
 		return true;

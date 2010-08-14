@@ -23,7 +23,7 @@ public class Query {
 
 	public Cursor query(Table table, List<? extends QueryColumn> queryColumns, WhereConditionBuilder where,
 			List<QueryColumn> groupBy, List<Orderby> orderBy) {
-		return query(Arrays.asList(table), queryColumns, where, groupBy, null);
+		return query(Arrays.asList(table), queryColumns, where, groupBy, orderBy);
 	}
 
 	public Cursor query(List<Table> tables, List<? extends QueryColumn> queryColumns, WhereConditionBuilder where,
@@ -34,10 +34,11 @@ public class Query {
 		String[] selectionArgs = where == null ? null : where.values();
 		String groupByColumns = groupBy == null ? null : StringUtils.join(CollectionUtils.sublist(groupBy,
 				ColumnsExtractor.fullNames()), ", ");
-		String orderByColumns = orderBy == null ? null : StringUtils.join(CollectionUtils.sublist(orderBy, new OrderByExtractor()), ", ");
+		String orderByColumns = (orderBy == null) ? null : StringUtils.join(CollectionUtils.sublist(orderBy, new OrderByExtractor()), ", ");
 		Logger.d(this, "query", "tables: " + qTables);
 		if(columns != null) Logger.d(this, "query", "columns: " + StringUtils.join(columns, ", "));
 		Logger.d(this, "query", "selection: " + selection);
+		Logger.d(this, "query", "orderBy (from " + orderBy + ") : " + orderByColumns);
 		if(selectionArgs != null) Logger.d(this, "query", "selectionArgs: " + StringUtils.join(selectionArgs, ", ") );
 		
 		return database.query(qTables, columns, selection, selectionArgs, groupByColumns, null, orderByColumns);

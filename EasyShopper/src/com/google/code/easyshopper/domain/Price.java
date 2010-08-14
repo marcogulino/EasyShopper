@@ -1,6 +1,7 @@
 package com.google.code.easyshopper.domain;
 
 import java.util.Currency;
+import java.util.Locale;
 
 public class Price {
 
@@ -53,6 +54,24 @@ public class Price {
 	@Override
 	public String toString() {
 		return this.getClass().getName() + " { id=" + id + ", amount=" + amount + ", market=" + market + ", product=" + product + "}";
+	}
+
+	public static Price newDefault() {
+		Price price = new Price(-1);
+		price.getAmount().setCurrency(defaultCurrency());
+		return price;
+	}
+
+	public static Currency defaultCurrency() {
+		Currency usd = Currency.getInstance("USD");
+		Currency defaultCurrency;
+		try {
+			defaultCurrency = Currency.getInstance(Locale.getDefault());
+			if( !defaultCurrency.getCurrencyCode().equals("EUR") && ! defaultCurrency.getCurrencyCode().equals("USD")) return usd;
+		} catch (Exception e) {
+			defaultCurrency = usd;
+		}
+		return defaultCurrency;
 	}
 
 }

@@ -100,7 +100,7 @@ public class ShoppingActivity extends Activity {
 		Currency currency = product.getPrice().getCurrency();
 		Amount currentAmount = totals.get(currency);
 		if(currentAmount==null) {
-			currentAmount=new Amount(0, currency);
+			currentAmount=new Amount(0l, currency);
 			totals.put(currency, currentAmount);
 		}
 		long partial = product.calculatePriceAmount().getAmount() * product.getQuantity();

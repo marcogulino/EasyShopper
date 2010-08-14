@@ -26,14 +26,11 @@ public class EditProduct implements ESTab {
 	private final CartProduct cartProduct;
 	private View view;
 	private UpdateValues updateOnExit;
-	private Spinner currencySpinner;
 	private ArrayAdapter<CurrencyItem> currencySpinnerAdapter;
-	private EditText editPrice;
 	private ProductImageManager imageCleaner;
 	private ProductSaver productSaver;
 	public static final String TAG = "edit_product";
 	private static final String[] currencies = new String[] { "EUR", "USD" };
-	private EditText productName;
 	private final Refresher otherTabsRefresher;
 
 	public EditProduct(CartProduct cartProduct, Activity activity, Refresher otherTabsRefresher) {
@@ -59,17 +56,12 @@ public class EditProduct implements ESTab {
 	}
 
 	public void setup() {
-
-		TextView barcodeTextview = (TextView) activity.findViewById(R.id.ProductBarcode);
-		barcodeTextview.setText(cartProduct.getFullBarcode());
-
-		currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
-		Price currentPrice = cartProduct.getPrice();
-		editPrice = (EditText) activity.findViewById(R.id.EditPrice);
+		final Spinner currencySpinner = (Spinner) activity.findViewById(R.id.EditCurrency);
+		EditText editPrice = (EditText) activity.findViewById(R.id.EditPrice);
 		Button saveButton = (Button) activity.findViewById(R.id.ProductCRUD_DoneButton);
 		Button addToCart = (Button) activity.findViewById(R.id.AddToCartButton);
 		productPictureView = (ImageView) activity.findViewById(R.id.ProductSmallPicture);
-		productName = (EditText) activity.findViewById(R.id.ProductName);
+		EditText productName = (EditText) activity.findViewById(R.id.ProductName);
 		RadioGroup productPriceType = (RadioGroup) activity.findViewById(R.id.PriceType);
 		
 		PriceTypeRetriever priceTypeRetriever = new PriceTypeRetrieverFromRadio(new RadioGroupWrapper(productPriceType));
@@ -97,24 +89,30 @@ public class EditProduct implements ESTab {
 		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, currencyRetriever, productSaver, activity));
 		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, productSaver, activity));
 
-		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(cartProduct.getShopping().getMarket().getName());
 
 		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);
 		currencySpinner.setAdapter(currencySpinnerAdapter);
-		populateCurrencyCombo(currentPrice);
 
-		if(cartProduct.getProduct().isPriceDefinedInBarcode()) {
-			productPriceType.check(R.id.PriceTypeWeight);
-		}
-
-		// TODO check sul prezzo anzichè sul market
-		addToCart.setEnabled(cartProduct.getShopping().getMarket() != null);
-		productName.setText(cartProduct.getProduct().getName());
-//		productPictureView.setImageDrawable(cartProduct.getProduct().getImage().getDrawableForProductDetails(activity));
 		productPictureView.setOnClickListener(new PopupImageListener(R.id.ProductName, cartProduct, activity, new GrabImageLauncher(imageCleaner)));
+		
 		productPriceTypeChangedListener.onCheckedChanged(null, 0);
 		setKilosForProductListener.onTextChanged(null, 0, 0, 0);
+		
+		copyCartProductToGui();
+	}
+	
+	private void copyCartProductToGui() {
+		((TextView) activity.findViewById(R.id.ProductBarcode)).setText(cartProduct.getFullBarcode());
+		EditText editPrice = (EditText) activity.findViewById(R.id.EditPrice);
+		Price currentPrice = cartProduct.getPrice();
 		editPrice.setText(currentPrice != null ? currentPrice.getAmount().getReadableAmount(1) : "");
+		populateCurrencyCombo(currentPrice);
+		((EditText) activity.findViewById(R.id.ProductName)).setText(cartProduct.getProduct().getName());
+		((TextView) activity.findViewById(R.id.EditPriceDialog_MarketName)).setText(cartProduct.getShopping().getMarket().getName());
+
+		if(cartProduct.getProduct().isPriceDefinedInBarcode()) {
+			((RadioGroup) activity.findViewById(R.id.PriceType)).check(R.id.PriceTypeWeight);
+		}
 
 	}
 
@@ -147,6 +145,6 @@ public class EditProduct implements ESTab {
 			}
 			currencySpinnerAdapter.add(adapter);
 		}
-		currencySpinner.setSelection(currencySpinnerAdapter.getPosition(currentCurrency));
+		((Spinner) activity.findViewById(R.id.EditCurrency)).setSelection(currencySpinnerAdapter.getPosition(currentCurrency));
 	}
 }

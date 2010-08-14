@@ -6,13 +6,13 @@ import com.google.code.easyshopper.Logger;
 
 public class Amount {
 	private Currency currency;
-	private long amount;
+	private Long amount;
 
 	public Amount() {
-		this(0, null);
+		this(null, null);
 	}
 
-	public Amount(long amount, Currency currency) {
+	public Amount(Long amount, Currency currency) {
 		this.amount = amount;
 		this.currency = currency;
 	}
@@ -35,6 +35,8 @@ public class Amount {
 	}
 
 	public String getReadableAmount(long quantity) {
+		if(amount==null) return "";
+		
 		long currentAmount = amount * quantity;
 		long scaleFactor = scaleFactor();
 		long intPart = (long) (currentAmount / scaleFactor);

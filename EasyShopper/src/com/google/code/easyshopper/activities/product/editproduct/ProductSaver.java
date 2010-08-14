@@ -29,9 +29,6 @@ public class ProductSaver {
 		productDBAdapter.save(cartProduct.getBarcodeForProduct(), productName, cartProduct.getProduct().getNumberOfPriceCharacters());
 		cartProduct.setProduct(productDBAdapter.lookup(cartProduct.getBarcodeForProduct()));
 		Price price = cartProduct.getPrice();
-		if (price == null ) {
-			price = new Price(-1);
-		}
 		price.setProduct(cartProduct.getProduct());
 		price.setMarket(cartProduct.getShopping().getMarket());
 		price.getAmount().setCurrency(currency);

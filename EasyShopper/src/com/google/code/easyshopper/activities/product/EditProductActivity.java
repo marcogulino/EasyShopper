@@ -71,6 +71,7 @@ public class EditProductActivity extends TabActivity {
 		Product product = new ProductDBAdapter(sqLiteOpenHelper).lookup(barcode);
 		if(product==null) product= new Product(barcode);
 		Price currentPrice = new PriceDBAdapter(sqLiteOpenHelper ).priceFor(product.getBarcode(), shopping.getMarket());
+		if(currentPrice==null) currentPrice=Price.newDefault();
 		cartProduct = new CartProduct(barcode, product, shopping, 0, currentPrice);
 
 		Logger.d(this, "onCreate", "product: " + product);

@@ -18,19 +18,17 @@ public class AddToCartListener implements OnClickListener {
 	private final EditText editPrice;
 	private final Activity activity;
 	private final CartProduct cartProduct;
-	private final CurrencyRetriever currencyRetriever;
 
-	public AddToCartListener(CartProduct cartProduct, EditText productName, EditText editPrice, CurrencyRetriever currencyRetriever, ProductSaver productSaver, Activity activity) {
+	public AddToCartListener(CartProduct cartProduct, EditText productName, EditText editPrice, ProductSaver productSaver, Activity activity) {
 		this.cartProduct = cartProduct;
 		this.productName = productName;
 		this.editPrice = editPrice;
-		this.currencyRetriever = currencyRetriever;
 		this.productSaver = productSaver;
 		this.activity = activity;
 	}
 
 	public void onClick(View v) {
-		productSaver.save(StringUtils.editTextToString(this.productName), currencyRetriever.currency(), StringUtils.editTextToString(editPrice));
+		productSaver.save(StringUtils.editTextToString(this.productName), StringUtils.editTextToString(editPrice));
 		addProductToCart();
 	}
 

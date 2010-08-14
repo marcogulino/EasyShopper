@@ -18,13 +18,11 @@ public class SetKilosForProductListener implements TextWatcher {
 
 	private final PriceTypeRetriever priceTypeRetriever;
 	private final Activity activity;
-	private final CurrencyRetriever currencyRetriever;
 	private final CartProduct cartProduct;
 
-	public SetKilosForProductListener(PriceTypeRetriever priceTypeRetriever, CartProduct cartProduct, CurrencyRetriever currencyRetriever, Activity activity) {
+	public SetKilosForProductListener(PriceTypeRetriever priceTypeRetriever, CartProduct cartProduct, Activity activity) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.cartProduct = cartProduct;
-		this.currencyRetriever = currencyRetriever;
 		this.activity = activity;
 	}
 
@@ -38,7 +36,7 @@ public class SetKilosForProductListener implements TextWatcher {
 		if(! priceTypeRetriever.priceIsInBarcode()) return;
 		String priceByKilos = StringUtils.editTextToString((EditText) activity.findViewById(R.id.EditPrice));
 		if(priceByKilos.length() == 0) return;
-		Currency currency = currencyRetriever.currency();
+		Currency currency = cartProduct.getPrice().getCurrency();
 		Amount productPrice = cartProduct.calculatePriceAmount(currency);
 		Amount priceAmountByKilos=new Amount().setCurrency(currency).setFromReadableAmount(priceByKilos);
 		TextView kilosLabel = (TextView) activity.findViewById(R.id.ProductWeightLabel);

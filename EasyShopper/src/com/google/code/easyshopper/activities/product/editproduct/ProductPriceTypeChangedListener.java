@@ -15,16 +15,14 @@ import com.google.code.easyshopper.domain.CartProduct;
 public class ProductPriceTypeChangedListener implements OnCheckedChangeListener {
 
 	private final PriceTypeRetriever priceTypeRetriever;
-	private final CurrencyRetriever currencyRetriever;
 	private final Activity activity;
 	private final CartProduct cartProduct;
 	private final Refresher refresher;
 
-	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, CurrencyRetriever currencyRetriever, Refresher refresher) {
+	public ProductPriceTypeChangedListener(PriceTypeRetriever priceTypeRetriever, Activity activity, CartProduct cartProduct, Refresher refresher) {
 		this.priceTypeRetriever = priceTypeRetriever;
 		this.activity = activity;
 		this.cartProduct = cartProduct;
-		this.currencyRetriever = currencyRetriever;
 		this.refresher = refresher;
 	}
 
@@ -41,7 +39,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 		
 		if(priceIsInBarcode) {
 			editPrice.setText("");
-			Amount price = cartProduct.calculatePriceAmount(currencyRetriever.currency());
+			Amount price = cartProduct.calculatePriceAmount(cartProduct.getPrice().getCurrency());
 			String priceAsLabel = price.getReadableAmount(1);
 			productPriceLabel.setText(priceAsLabel);
 		}

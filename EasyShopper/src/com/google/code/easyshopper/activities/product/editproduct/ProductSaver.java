@@ -1,7 +1,5 @@
 package com.google.code.easyshopper.activities.product.editproduct;
 
-import java.util.Currency;
-
 import android.app.Activity;
 
 import com.google.code.easyshopper.Logger;
@@ -23,7 +21,7 @@ public class ProductSaver {
 		
 	}
 	
-	public void save(String productName, Currency currency, String priceString) {
+	public void save(String productName, String priceString) {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(new EasyShopperSqliteOpenHelper(activity));
 		Logger.d(this, "save", "Saving cartproduct: " + cartProduct + ", with name: " + productName);
 		productDBAdapter.save(cartProduct.getBarcodeForProduct(), productName, cartProduct.getProduct().getNumberOfPriceCharacters());
@@ -31,7 +29,6 @@ public class ProductSaver {
 		Price price = cartProduct.getPrice();
 		price.setProduct(cartProduct.getProduct());
 		price.setMarket(cartProduct.getShopping().getMarket());
-		price.getAmount().setCurrency(currency);
 		price.getAmount().setFromReadableAmount(priceString);
 		new PriceDBAdapter(new EasyShopperSqliteOpenHelper(activity)).saveAndAssociate(price, cartProduct);		
 	}

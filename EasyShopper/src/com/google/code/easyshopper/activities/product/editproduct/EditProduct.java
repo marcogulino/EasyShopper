@@ -68,14 +68,7 @@ public class EditProduct implements ESTab {
 
 		productName.addTextChangedListener(new ButtonsEnablerWatcher(saveButton, addToCart, editPrice));
 		editPrice.addTextChangedListener(new ButtonsEnablerWatcher(saveButton, addToCart, productName) );
-		CurrencyRetriever currencyRetriever = new CurrencyRetriever() {
-			
-			public Currency currency() {
-				Logger.d(this, "currency", "currency list: " + currencySpinnerAdapter.getCount());
-				return currencySpinnerAdapter.getItem(currencySpinner.getSelectedItemPosition()).currency;
-			}
-		};
-		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, cartProduct, currencyRetriever , activity);
+		SetKilosForProductListener setKilosForProductListener = new SetKilosForProductListener(priceTypeRetriever, cartProduct , activity);
 		editPrice.addTextChangedListener(setKilosForProductListener );
 		Refresher refresher = new Refresher() {
 			
@@ -84,14 +77,15 @@ public class EditProduct implements ESTab {
 				otherTabsRefresher.refresh();
 			}
 		};
-		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, currencyRetriever, refresher );
+		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, refresher );
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
-		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, currencyRetriever, productSaver, activity));
-		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, currencyRetriever, productSaver, activity));
+		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, productSaver, activity));
+		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, productSaver, activity));
 
 
 		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);
 		currencySpinner.setAdapter(currencySpinnerAdapter);
+		currencySpinner.setOnItemSelectedListener(new ChangeCurrency(cartProduct, currencySpinnerAdapter));
 
 		productPictureView.setOnClickListener(new PopupImageListener(R.id.ProductName, cartProduct, activity, new GrabImageLauncher(imageCleaner)));
 		

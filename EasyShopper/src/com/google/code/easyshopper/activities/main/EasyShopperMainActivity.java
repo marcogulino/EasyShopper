@@ -1,7 +1,5 @@
 package com.google.code.easyshopper.activities.main;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import android.app.Activity;

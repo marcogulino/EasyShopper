@@ -30,6 +30,12 @@ public class AmountTest extends AndroidTestCase {
 		assertEquals(12345678, amount.getAmount());
 	}
 	
+	public void testShouldSetNullAmount() {
+		Amount amount=new Amount(10l, Currency.getInstance("EUR"));
+		amount.setFromReadableAmount("");
+		assertEquals("", amount.getReadableAmount(1));
+	}
+	
 	public void testShouldDisplayEmptyStringForNullAmount() {
 		Amount amount=new Amount(null, Currency.getInstance("EUR"));
 		assertEquals("", amount.getReadableAmount(1));

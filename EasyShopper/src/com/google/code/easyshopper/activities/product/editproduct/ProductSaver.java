@@ -21,7 +21,7 @@ public class ProductSaver {
 		
 	}
 	
-	public void save(String priceString) {
+	public void save() {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(new EasyShopperSqliteOpenHelper(activity));
 		Logger.d(this, "save", "Saving cartproduct: " + cartProduct);
 		productDBAdapter.save(cartProduct);
@@ -29,7 +29,6 @@ public class ProductSaver {
 		Price price = cartProduct.getPrice();
 		price.setProduct(cartProduct.getProduct());
 		price.setMarket(cartProduct.getShopping().getMarket());
-		price.getAmount().setFromReadableAmount(priceString);
 		new PriceDBAdapter(new EasyShopperSqliteOpenHelper(activity)).saveAndAssociate(price, cartProduct);		
 	}
 }

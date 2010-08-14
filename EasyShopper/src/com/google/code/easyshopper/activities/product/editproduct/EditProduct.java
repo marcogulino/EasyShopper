@@ -62,6 +62,7 @@ public class EditProduct implements ESTab {
 		ImageView productPictureView = (ImageView) activity.findViewById(R.id.ProductSmallPicture);
 		EditText productName = (EditText) activity.findViewById(R.id.ProductName);
 		productName.addTextChangedListener(new UpdateProductNameWatcher(cartProduct));
+		editPrice.addTextChangedListener(new UpdateProductPriceWatcher(cartProduct));
 		RadioGroup productPriceType = (RadioGroup) activity.findViewById(R.id.PriceType);
 		
 		PriceTypeRetriever priceTypeRetriever = new PriceTypeRetrieverFromRadio(new RadioGroupWrapper(productPriceType));
@@ -79,8 +80,8 @@ public class EditProduct implements ESTab {
 		};
 		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, refresher );
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
-		saveButton.setOnClickListener(new SaveProductListener(editPrice, productSaver, activity));
-		addToCart.setOnClickListener(new AddToCartListener(cartProduct, editPrice, productSaver, activity));
+		saveButton.setOnClickListener(new SaveProductListener(productSaver, activity));
+		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productSaver, activity));
 
 
 		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);

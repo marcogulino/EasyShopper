@@ -56,6 +56,10 @@ public class Amount {
 	}
 
 	public Amount setFromReadableAmount(String amount) {
+		if(amount.equals("")) {
+			this.amount=null;
+			return this;
+		}
 		if (amount.indexOf(getSeparator()) < 0) {
 			this.amount = Long.parseLong(amount) * scaleFactor();
 			return this;

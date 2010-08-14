@@ -5,7 +5,7 @@ package com.google.code.easyshopper.domain;
 
 public class Product {
 	private String name;
-	private final String barcode;
+	private String barcode;
 	private ProductImage productImage;
 	private int numberOfPriceCharacters;
 	
@@ -50,6 +50,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product {barcode='" + barcode +"', name='" + name + "', numberOfPriceCharacters=" + numberOfPriceCharacters + "}";
+	}
+
+	public void setBarcode(String barcode) {
+		this.barcode=barcode;
 	}
 
 }

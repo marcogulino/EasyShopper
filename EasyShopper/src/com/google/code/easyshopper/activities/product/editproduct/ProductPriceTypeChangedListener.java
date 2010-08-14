@@ -31,6 +31,7 @@ public class ProductPriceTypeChangedListener implements OnCheckedChangeListener 
 		TableLayout priceDetailsTable=(TableLayout) activity.findViewById(R.id.PriceDetailsTable);
 		TextView productPriceLabel=(TextView) activity.findViewById(R.id.ProductPriceLabel);
 		cartProduct.getProduct().setNumberOfPriceCharacters(priceTypeRetriever.priceBarcodeChars());
+		cartProduct.getProduct().setBarcode(cartProduct.getBarcodeForProduct());
 		
 		boolean priceIsInBarcode = priceTypeRetriever.priceIsInBarcode();
 		

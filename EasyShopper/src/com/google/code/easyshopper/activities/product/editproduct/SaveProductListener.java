@@ -10,20 +10,18 @@ import com.google.code.easyshopper.activities.product.EditProductActivity;
 import com.google.code.easyshopper.utility.StringUtils;
 
 public class SaveProductListener implements OnClickListener {
-	private final EditText productName;
 	private final EditText editPrice;
 	private final ProductSaver productSaver;
 	private final Activity activity;
 
-	public SaveProductListener(EditText productName, EditText editPrice, ProductSaver productSaver, Activity activity) {
-		this.productName = productName;
+	public SaveProductListener(EditText editPrice, ProductSaver productSaver, Activity activity) {
 		this.editPrice = editPrice;
 		this.productSaver = productSaver;
 		this.activity = activity;
 	}
 
 	public void onClick(View v) {
-		productSaver.save(StringUtils.editTextToString(this.productName), StringUtils.editTextToString(editPrice));
+		productSaver.save(StringUtils.editTextToString(editPrice));
 		Intent intent = activity.getIntent();
 		intent.setAction(EditProductActivity.PRODUCT_SAVED_ACTION);
 		activity.setResult(EditProductActivity.PRODUCT_SAVED, intent);

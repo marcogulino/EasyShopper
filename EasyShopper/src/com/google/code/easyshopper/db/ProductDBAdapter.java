@@ -54,7 +54,10 @@ public class ProductDBAdapter extends AbstractDBAdapter {
 		return product;
 	}
 
-	public void save(String barcode, String productName, int numberOfPriceChars) {
+	public void save(CartProduct cartProduct) {
+		String barcode=cartProduct.getBarcodeForProduct();
+		String productName=cartProduct.getProduct().getName();
+		int numberOfPriceChars=cartProduct.getProduct().getNumberOfPriceCharacters();
 		Logger.d(this, "save", "barcode=" + barcode + ", prodName=" + productName + ", numberOfPriceChars=" + numberOfPriceChars);
 		SQLiteDatabase writableDatabase = writableDatabase();
 		Product existingProduct = new ProductDBAdapter(writableDatabase).lookup(barcode);

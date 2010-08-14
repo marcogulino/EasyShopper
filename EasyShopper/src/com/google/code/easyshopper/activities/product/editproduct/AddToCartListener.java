@@ -13,22 +13,20 @@ import com.google.code.easyshopper.domain.CartProduct;
 import com.google.code.easyshopper.utility.StringUtils;
 
 public class AddToCartListener implements OnClickListener {
-	private final EditText productName;
 	private final ProductSaver productSaver;
 	private final EditText editPrice;
 	private final Activity activity;
 	private final CartProduct cartProduct;
 
-	public AddToCartListener(CartProduct cartProduct, EditText productName, EditText editPrice, ProductSaver productSaver, Activity activity) {
+	public AddToCartListener(CartProduct cartProduct, EditText editPrice, ProductSaver productSaver, Activity activity) {
 		this.cartProduct = cartProduct;
-		this.productName = productName;
 		this.editPrice = editPrice;
 		this.productSaver = productSaver;
 		this.activity = activity;
 	}
 
 	public void onClick(View v) {
-		productSaver.save(StringUtils.editTextToString(this.productName), StringUtils.editTextToString(editPrice));
+		productSaver.save(StringUtils.editTextToString(editPrice));
 		addProductToCart();
 	}
 

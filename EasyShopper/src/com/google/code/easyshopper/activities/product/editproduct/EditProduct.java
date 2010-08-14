@@ -22,7 +22,6 @@ import com.google.code.easyshopper.domain.Price;
 public class EditProduct implements ESTab {
 
 	private final Activity activity;
-	private ImageView productPictureView;
 	private final CartProduct cartProduct;
 	private View view;
 	private UpdateValues updateOnExit;
@@ -60,8 +59,9 @@ public class EditProduct implements ESTab {
 		EditText editPrice = (EditText) activity.findViewById(R.id.EditPrice);
 		Button saveButton = (Button) activity.findViewById(R.id.ProductCRUD_DoneButton);
 		Button addToCart = (Button) activity.findViewById(R.id.AddToCartButton);
-		productPictureView = (ImageView) activity.findViewById(R.id.ProductSmallPicture);
+		ImageView productPictureView = (ImageView) activity.findViewById(R.id.ProductSmallPicture);
 		EditText productName = (EditText) activity.findViewById(R.id.ProductName);
+		productName.addTextChangedListener(new UpdateProductNameWatcher(cartProduct));
 		RadioGroup productPriceType = (RadioGroup) activity.findViewById(R.id.PriceType);
 		
 		PriceTypeRetriever priceTypeRetriever = new PriceTypeRetrieverFromRadio(new RadioGroupWrapper(productPriceType));
@@ -79,8 +79,8 @@ public class EditProduct implements ESTab {
 		};
 		ProductPriceTypeChangedListener productPriceTypeChangedListener = new ProductPriceTypeChangedListener(priceTypeRetriever, activity, cartProduct, refresher );
 		productPriceType.setOnCheckedChangeListener(productPriceTypeChangedListener );
-		saveButton.setOnClickListener(new SaveProductListener(productName, editPrice, productSaver, activity));
-		addToCart.setOnClickListener(new AddToCartListener(cartProduct, productName, editPrice, productSaver, activity));
+		saveButton.setOnClickListener(new SaveProductListener(editPrice, productSaver, activity));
+		addToCart.setOnClickListener(new AddToCartListener(cartProduct, editPrice, productSaver, activity));
 
 
 		currencySpinnerAdapter = new ArrayAdapter<CurrencyItem>(activity, android.R.layout.simple_dropdown_item_1line);

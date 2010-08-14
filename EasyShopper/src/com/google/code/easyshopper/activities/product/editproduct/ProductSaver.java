@@ -21,10 +21,10 @@ public class ProductSaver {
 		
 	}
 	
-	public void save(String productName, String priceString) {
+	public void save(String priceString) {
 		ProductDBAdapter productDBAdapter = new ProductDBAdapter(new EasyShopperSqliteOpenHelper(activity));
-		Logger.d(this, "save", "Saving cartproduct: " + cartProduct + ", with name: " + productName);
-		productDBAdapter.save(cartProduct.getBarcodeForProduct(), productName, cartProduct.getProduct().getNumberOfPriceCharacters());
+		Logger.d(this, "save", "Saving cartproduct: " + cartProduct);
+		productDBAdapter.save(cartProduct);
 		cartProduct.setProduct(productDBAdapter.lookup(cartProduct.getBarcodeForProduct()));
 		Price price = cartProduct.getPrice();
 		price.setProduct(cartProduct.getProduct());

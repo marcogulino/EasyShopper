@@ -50,7 +50,8 @@
 <string name="PriceForUnit">Price for unit</string>
 <string name="PriceForKilos">Price for kilogram</string>
 <string name="N_A">Not available</string>
-<string name="Take_New_Picture">Scatta foto</string>
-<string name="Close">Chiudi</string>
-<string name="Add_New_Tag">Aggiungi un tag...</string>
+<string name="Take_New_Picture">Take new Picture</string>
+<string name="Close">Close</string>
+<string name="Add_New_Tag">Add a new tag...</string>
+<string name="BarcodeScannerNotFound">Barcode Scanner application not found. Do you want to download it now?</string>
 </resources>

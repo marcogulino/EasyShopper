@@ -51,5 +51,6 @@
 <string name="N_A">Non disponibile</string>
 <string name="Take_New_Picture">Scatta foto</string>
 <string name="Close">Chiudi</string>
-<string name="Add_New_Tag">Add new tag...</string>
+<string name="Add_New_Tag">Aggiungi tag...</string>
+<string name="BarcodeScannerNotFound">L\'applicazione Barcode Scanner non è stata trovata. Vuoi scaricarla adesso?</string>
 </resources>

@@ -53,7 +53,7 @@ public class MarketActivity extends MapActivity implements LocationListener {
 	public static final int NO_MARKET_SELECTED = -1;
 	protected static final int MARKET_PICKED = 1;
 	public static final String SHOPPING_ID = "_SHOPPING_ID_";
-	private MapView marketMapView;
+	private EasyShopperMapView marketMapView;
 	private MyLocationOverlay myLocationOverlay;
 	private MarketsItemizedOverlay itemizedOverlay;
 	private MarketsSpinnerAdapter marketsSpinnerAdapter;
@@ -72,7 +72,7 @@ public class MarketActivity extends MapActivity implements LocationListener {
 		marketsRetrieverByDistance = new MarketsRetrieverByDistance(this);
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-    	marketMapView = (MapView) findViewById(R.id.MarketMapView);
+    	marketMapView = (EasyShopperMapView) findViewById(R.id.MarketMapView);
     	marketMapView.setBuiltInZoomControls(true);
     	marketMapView.setSatellite(false);
     	marketMapView.setTraffic(false);

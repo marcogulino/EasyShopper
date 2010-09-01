@@ -13,7 +13,7 @@
 		<Button android:text="@android:string/cancel" android:id="@+id/Market_CancelButton"  android:minWidth="100dp"
 			android:layout_width="wrap_content" android:layout_height="wrap_content" />
 	</LinearLayout>
-	<com.google.android.maps.MapView
+	<com.google.code.easyshopper.activities.market.EasyShopperMapView
 		android:layout_width="fill_parent" android:layout_height="fill_parent"
 		android:apiKey="0LqukOwZc3BvgLpPvwpFrUFeHbvW92ltJlpzSkQ" android:id="@+id/MarketMapView"
 		android:clickable="true" android:longClickable="true"/>

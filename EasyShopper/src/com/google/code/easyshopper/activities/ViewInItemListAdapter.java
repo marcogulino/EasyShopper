@@ -1,4 +1,4 @@
-package com.google.code.easyshopper.activities.shopping;
+package com.google.code.easyshopper.activities;
 
 import android.app.Activity;
 import android.view.View;
@@ -6,21 +6,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.google.code.easyshopper.Logger;
-import com.google.code.easyshopper.R;
 
-public class ProductsListAdapter extends ArrayAdapter<ProductModelListAdapterItem> {
+public class ViewInItemListAdapter extends ArrayAdapter<ModelListAdapterItemWithView> {
 
 	private final Activity activity;
 
-	public ProductsListAdapter(Activity activity) {
-		super(activity, R.layout.products_item_layout);
+	public ViewInItemListAdapter(Activity activity) {
+		super(activity, 0);
 		this.activity = activity;
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Logger.d(this, "getView", "got arguments: " + position + ", " + convertView + ", " + parent);
-		ProductModelListAdapterItem item = getItem(position);
+		ModelListAdapterItemWithView item = getItem(position);
 		return item.getView(activity);
 	}
 }

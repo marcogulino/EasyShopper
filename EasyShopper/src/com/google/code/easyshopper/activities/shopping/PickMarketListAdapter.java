@@ -6,9 +6,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.ModelListAdapterItemWithView;
 import com.google.code.easyshopper.domain.Shopping;
 
-public class PickMarketListAdapter extends ProductModelListAdapterItem {
+public class PickMarketListAdapter extends ModelListAdapterItemWithView {
 
 	private final Activity activity;
 	private final Shopping shopping;

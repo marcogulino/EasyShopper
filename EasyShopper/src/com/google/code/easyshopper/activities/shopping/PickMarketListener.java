@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.google.code.easyshopper.activities.market.MarketActivity;
+import com.google.code.easyshopper.activities.marketslist.MarketsListActivity;
 import com.google.code.easyshopper.domain.Shopping;
 
 final class PickMarketListener implements OnClickListener {
@@ -22,7 +23,7 @@ final class PickMarketListener implements OnClickListener {
 	}
 
 	private void startPickMarket() {
-		Intent marketActivity = new Intent(activity, MarketActivity.class);
+		Intent marketActivity = new Intent(activity, MarketsListActivity.class);
 		marketActivity.putExtra(MarketActivity.SHOPPING_ID, shopping.getId());
 		activity.startActivityForResult(marketActivity, MarketActivity.PICK_MARKET);
 	}

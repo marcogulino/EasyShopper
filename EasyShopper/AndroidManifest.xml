@@ -11,17 +11,18 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".activities.shopping.ShoppingActivity"></activity>
-		<activity android:name=".activities.product.EditProductActivity"></activity>
-		<activity android:name=".activities.market.MarketActivity"></activity>
+		<activity android:name=".activities.shopping.ShoppingActivity" />
+		<activity android:name=".activities.product.EditProductActivity" />
+		<activity android:name=".activities.market.MarketActivity" />
 		<uses-library android:name="com.google.android.maps" />
-	</application>
+	<activity android:name=".activities.marketslist.MarketsListActivity" />
+</application>
 
 
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
-	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"></uses-permission>
-	<uses-sdk android:targetSdkVersion="7" android:minSdkVersion="7"></uses-sdk>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+	<uses-sdk android:targetSdkVersion="7" android:minSdkVersion="7" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest> 

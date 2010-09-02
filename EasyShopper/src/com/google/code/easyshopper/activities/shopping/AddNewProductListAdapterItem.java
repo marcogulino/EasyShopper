@@ -13,9 +13,10 @@ import android.widget.TextView;
 import com.google.code.easyshopper.EditableTextDialog;
 import com.google.code.easyshopper.ModelListAdapterItem;
 import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.ModelListAdapterItemWithView;
 import com.google.code.easyshopper.domain.Shopping;
 
-public class AddNewProductListAdapterItem extends ProductModelListAdapterItem {
+public class AddNewProductListAdapterItem extends ModelListAdapterItemWithView {
 	public static final String SCAN_PRODUCT_ACTION = "com.google.zxing.client.android.SCAN";
 	private final Activity activity;
 	private final Shopping shopping;

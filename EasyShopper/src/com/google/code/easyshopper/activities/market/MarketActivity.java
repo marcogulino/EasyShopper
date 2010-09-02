@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
-import com.google.android.maps.MapView;
 import com.google.android.maps.MyLocationOverlay;
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;

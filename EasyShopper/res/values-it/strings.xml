@@ -53,4 +53,6 @@
 <string name="Close">Chiudi</string>
 <string name="Add_New_Tag">Aggiungi tag...</string>
 <string name="BarcodeScannerNotFound">L\'applicazione Barcode Scanner non è stata trovata. Vuoi scaricarla adesso?</string>
+<string name="MarketsList_Nearby">Nelle vicinanze...</string>
+<string name="MarketsList_Favourites">I tuoi preferiti</string>
 </resources>

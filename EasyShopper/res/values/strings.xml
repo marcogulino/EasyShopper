@@ -54,4 +54,6 @@
 <string name="Close">Close</string>
 <string name="Add_New_Tag">Add a new tag...</string>
 <string name="BarcodeScannerNotFound">Barcode Scanner application not found. Do you want to download it now?</string>
+<string name="MarketsList_Nearby">Nearby...</string>
+<string name="MarketsList_Favourites">Your favourites</string>
 </resources>

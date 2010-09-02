@@ -14,9 +14,10 @@ import android.widget.TextView;
 
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.ModelListAdapterItemWithView;
 import com.google.code.easyshopper.domain.CartProduct;
 
-public class ProductListAdapterItem extends ProductModelListAdapterItem {
+public class ProductListAdapterItem extends ModelListAdapterItemWithView {
 
 	private final Activity activity;
 	private final CartProduct cartProduct;

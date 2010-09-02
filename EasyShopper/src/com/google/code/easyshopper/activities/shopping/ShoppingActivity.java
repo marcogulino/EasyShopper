@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.code.easyshopper.Logger;
 import com.google.code.easyshopper.OnItemLongClickListenerForListAdapter;
 import com.google.code.easyshopper.R;
+import com.google.code.easyshopper.activities.ViewInItemListAdapter;
 import com.google.code.easyshopper.activities.market.MarketActivity;
 import com.google.code.easyshopper.db.ProductShoppingDBAdapter;
 import com.google.code.easyshopper.db.ShoppingDBAdapter;
@@ -27,7 +28,7 @@ import com.google.code.easyshopper.listeners.OnItemClickListenerForListAdapter;
 
 public class ShoppingActivity extends Activity {
 	public static final String PARAM_SHOPPING_ID = "_PARAM_SHOPPING_ID_";
-	private ProductsListAdapter mainMenuListAdapter;
+	private ViewInItemListAdapter mainMenuListAdapter;
 	private Shopping shopping;
 	private ShoppingDBAdapter shoppingDBAdapter;
 
@@ -57,7 +58,7 @@ public class ShoppingActivity extends Activity {
 		shopping = shoppingDBAdapter.lookUp(shoppingId);
 
 		setMarketViewText();
-		mainMenuListAdapter = new ProductsListAdapter(this);
+		mainMenuListAdapter = new ViewInItemListAdapter(this);
 		listView.setAdapter(mainMenuListAdapter);
 		populateMainList();
 		listView.setOnItemClickListener(new OnItemClickListenerForListAdapter());

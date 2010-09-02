@@ -11,6 +11,7 @@ public class Market {
 	private String name;
 	private int latitude;
 	private int longitude;
+	private String address;
 	
 	public Market(long id) {
 		this.id=id;
@@ -69,13 +70,21 @@ public class Market {
 		this.id=id;
 	}
 	
+
+	// TODO Save on database
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
-	// Eclipse Generated Code
+	public String getAddress() {
+		return address;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + latitude;
 		result = prime * result + longitude;
@@ -92,6 +101,11 @@ public class Market {
 		if (getClass() != obj.getClass())
 			return false;
 		Market other = (Market) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		if (id != other.id)
 			return false;
 		if (latitude != other.latitude)
@@ -105,5 +119,6 @@ public class Market {
 			return false;
 		return true;
 	}
+	
 	
 }
